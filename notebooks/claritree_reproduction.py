@@ -159,7 +159,9 @@ def _(mo):
     It creates a clean pip environment, builds pinned Eigen and the pinned
     author extension, and prints one structured result covering C1–C6.
     The detailed illustrated report in `reports/claritree-6-claim-reproduction/`
-    explains the implementation and every substitution.
+    explains the implementation and every substitution. The
+    [public experiment logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w)
+    provides the browsable run history.
     """)
     return
 

@@ -126,3 +126,5 @@ than one calibrated fold plus released five-fold records.
 Experiment lineage: [pinned-source baseline](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/pinned-source-baseline-c1-c4-and-c6),
 [resolved pip build paths](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/resolve-pip-build-paths), and
 [six-claim suite with independent Figure 1 reconstruction](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/independent-figure-1-reconstruction).
+The [public experiment logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w)
+provides the browsable run history.

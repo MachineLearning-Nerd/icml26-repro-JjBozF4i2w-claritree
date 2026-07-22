@@ -26,6 +26,7 @@ GPU. The final formal run used 202.0 seconds for the scientific checks and
 
 - [Illustrated claim-by-claim report](reports/claritree-6-claim-reproduction/report.md)
 - [Self-contained interactive tutorial](notebooks/claritree_reproduction.py)
+- [Public experiment logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w)
 
 ## Experiment log
 
