@@ -2,7 +2,7 @@
 
 ## Current step
 
-`ready:canonical-queue-handoff`
+`publication_queued:awaiting-shared-drain-space-readback`
 
 ## Completed
 
@@ -44,9 +44,7 @@
 
 ## Next actions
 
-1. Atomically enqueue the GitHub-pushed, gate-complete paper in the canonical
-   backlog.
-2. Wait for the shared publisher to create/read back the Hugging Face Space,
+1. Wait for the shared publisher to create/read back the Hugging Face Space,
    then record its public SHA and tags here and in the registry.
 
 ## Gate state
@@ -70,6 +68,10 @@ C3, C4, and C6. C6 is published only with its exact release values (100% vs
 excluded as a non-runnable source protocol.
 
 FULL_GATE_READY: JjBozF4i2w
+
+The atomic canonical-backlog handoff completed on 2026-07-22 after the public
+GitHub push at `04ba48c8ebf2050a2287bc148db719ecbd155579`. The shared drain is
+the sole Hugging Face publisher; do not create a competing Space manually.
 
 ## Scope guard
 
