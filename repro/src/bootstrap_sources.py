@@ -62,8 +62,17 @@ def main() -> None:
     )
     run("cmake", "--install", str(EIGEN_BUILD))
 
+    pybind11_cmake = subprocess.check_output(
+        [sys.executable, "-m", "pybind11", "--cmakedir"], text=True
+    ).strip()
+    if not Path(pybind11_cmake).is_dir():
+        raise RuntimeError(f"pybind11 CMake directory not found: {pybind11_cmake}")
+
     build_env = os.environ.copy()
-    build_env["CMAKE_ARGS"] = f"-DCMAKE_PREFIX_PATH={EIGEN_INSTALL}"
+    build_env["CMAKE_ARGS"] = (
+        f"-DCMAKE_PREFIX_PATH={EIGEN_INSTALL} "
+        f"-Dpybind11_DIR={pybind11_cmake}"
+    )
     run(
         sys.executable,
         "-m",
