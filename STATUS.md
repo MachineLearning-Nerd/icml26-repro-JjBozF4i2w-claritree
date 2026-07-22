@@ -2,7 +2,7 @@
 
 ## Current step
 
-`in_progress:source-build-and-protocol-audit`
+`ready:canonical-queue-handoff`
 
 ## Completed
 
@@ -34,12 +34,20 @@
   job-log payload is retained in `outputs/california_outer4_cpp.json`. The job
   subsequently returned ERROR only because the supplied token lacked permission
   to create the private artifact dataset; no computation result was lost.
+- Ran the matching fixed-split author-driver calibration on CPU-upgrade job
+  `6a609dfd13e6ef894d54b655`: the selected outer-4 configuration exactly
+  reproduced committed test R2 `0.7431327225376596`.
+- Created and pinned the Trackio logbook with pages for every anchored claim,
+  controls, methods, and conclusion.
+- Created and pushed the public GitHub handoff:
+  `MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree@7b261a2`.
 
 ## Next actions
 
-1. Re-run the fail-closed gate covering pins, C1--C4 checks, C6 readback,
-   source smoke, and explicit C5 scope exclusion.
-2. Decide whether the documented C5 and C6 limitations permit publication.
+1. Atomically enqueue the GitHub-pushed, gate-complete paper in the canonical
+   backlog.
+2. Wait for the shared publisher to create/read back the Hugging Face Space,
+   then record its public SHA and tags here and in the registry.
 
 ## Gate state
 
@@ -55,6 +63,13 @@ pinned driver entrypoint and exactly reproduced outer-4 `test_r2`
 `0.7431327225376596` in `62.04s` fit / `88.53s` elapsed. The setup-only retry
 `6a609d9713e6ef894d54b64f` failed before fitting because it invoked absent
 `pip` rather than UV's installer; it is not evidence.
+
+The current gate is affirmative for the five selected anchored claims C1, C2,
+C3, C4, and C6. C6 is published only with its exact release values (100% vs
+70%) and the paper's rounded 95%/60% wording disclosed. C5 remains explicitly
+excluded as a non-runnable source protocol.
+
+FULL_GATE_READY: JjBozF4i2w
 
 ## Scope guard
 
