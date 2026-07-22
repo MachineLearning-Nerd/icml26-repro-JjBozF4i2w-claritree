@@ -1,0 +1,26 @@
+{
+  "evidence_source": {
+    "kind": "authenticated_hugging_face_job_log",
+    "job_id": "6a609a58d09dc1f57c6c1d62",
+    "job_url": "https://huggingface.co/jobs/DineshAI/6a609a58d09dc1f57c6c1d62",
+    "job_terminal_status": "ERROR",
+    "terminal_status_explanation": "The source run completed and printed this payload, but persistence subsequently failed because the supplied HF_TOKEN could not create DineshAI/JjBozF4i2w-artifacts-private (HTTP 403)."
+  },
+  "result": "completed",
+  "hardware": "cpu-upgrade",
+  "source_commit": "4397f8dbc8b63751777e7918b89972e793796dfd",
+  "eigen_commit": "3147391d946bb4b6c68edd901f2add6ac1f31f8c",
+  "command": [
+    "/tmp/claritree-cpu-calibration-xx2qwpll/run_tree",
+    "/tmp/claritree-cpu-calibration-xx2qwpll/CLARITree/data/california_housing/splits/outer_4/train.csv",
+    "4.0",
+    "0.001",
+    "0.00001",
+    "20",
+    "quantile"
+  ],
+  "stdout": "Loaded CSV: /tmp/claritree-cpu-calibration-xx2qwpll/CLARITree/data/california_housing/splits/outer_4/train.csv (16347 rows, 13 features)\nGreedy loss found: 4.89252e+13 in 0.262736 seconds\nGreedy TRAIN MSE: 3.56221e+09\nGreedy TRAIN R^2: 0.732722\nGreedy TEST MSE: 3.40244e+09\nGreedy TEST R^2: 0.747834\nCLARITree loss found: 4.47972e+13 in 56.9574 seconds\nCLARITree TRAIN MSE: 3.16047e+09\nCLARITree TRAIN R^2: 0.762865\nCLARITree TEST MSE: 3.0286e+09\nCLARITree TEST R^2: 0.77554\n",
+  "stderr": "",
+  "elapsed_s": 76.21077346801758,
+  "max_rss_kb": 463796
+}

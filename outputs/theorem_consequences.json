@@ -1,0 +1,14 @@
+{
+  "theorem_5_1_runtime_expression": "O(k*n*log(n) + d^2*n*k^4*T)",
+  "runtime_component_doubling_ratios": {
+    "n": 2.0,
+    "d": 4.0,
+    "k": 16.0,
+    "thresholds": 2.0
+  },
+  "runtime_expression_verified": true,
+  "c3_gap_epsilon_count": 200,
+  "c3_smallest_gap_margin": 0.010204081632653073,
+  "c3_gap_inequality_verified": true,
+  "interpretation": "For every tested epsilon in (0, 1/2), the proof's displayed (1-epsilon)/(2epsilon) lower ratio strictly exceeds 1/(4epsilon)."
+}

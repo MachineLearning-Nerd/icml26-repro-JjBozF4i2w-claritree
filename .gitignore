@@ -1,0 +1,18 @@
+.venv/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+
+# Re-cloneable pinned external dependencies; their immutable pins are in docs.
+upstream/
+repro/vendor/eigen/
+
+# Local build products. Keep only small, auditable JSON evidence.
+outputs/eigen-cmake/
+outputs/eigen-install/
+outputs/run_tree
+outputs/*.so
+
+# Trackio runtime scratch; retain the logbook and metadata.
+.trackio/logbook/.sync_*
+.trackio/logbook/*.log

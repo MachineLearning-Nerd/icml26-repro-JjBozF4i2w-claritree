@@ -1,0 +1,25 @@
+{
+  "evidence_source": {
+    "kind": "authenticated_hugging_face_job_log",
+    "job_id": "6a609dfd13e6ef894d54b655",
+    "job_url": "https://huggingface.co/jobs/DineshAI/6a609dfd13e6ef894d54b655",
+    "job_terminal_status": "COMPLETED"
+  },
+  "command": ["python", "scripts/run_ours_outer.py", "--name", "california_housing", "--outer", "4", "--method", "claritree", "--depth", "4", "--n_thresholds", "20", "--thresholds_strategy", "quantile"],
+  "eigen_commit": "3147391d946bb4b6c68edd901f2add6ac1f31f8c",
+  "elapsed_s": 88.53419089317322,
+  "hardware": "cpu-upgrade",
+  "metrics": {
+    "loss": 55037475125520.97,
+    "n_leaves": 16,
+    "test_mse": 3384540957.2721786,
+    "test_r2": 0.7431327225376596,
+    "train_mse": 3100465879.4209824,
+    "train_r2": 0.7679543903681942,
+    "train_time_s": 62.040993452072144
+  },
+  "protocol": {"cv": "not run; fixed selected configuration only", "depth": 4, "kappa": 1e-05, "lambda": 0.001, "n_thresholds": 20, "outer": 4, "thresholds_strategy": "quantile"},
+  "result": "completed",
+  "source_commit": "4397f8dbc8b63751777e7918b89972e793796dfd",
+  "source_entrypoint": "scripts.run_ours_outer.fit_eval"
+}

@@ -1,0 +1,91 @@
+{
+  "claritree": {
+    "parameters": {
+      "lambda": 0.001,
+      "kappa": 1e-05
+    },
+    "mean_validation_r2": 0.7478730375384298,
+    "mean_test_r2": 0.7499375138107127,
+    "std_test_r2": 0.01006107119945698,
+    "mean_train_time_s": 69.51568279266357,
+    "max_train_time_s": 72.01430749893188,
+    "selected_folds": [
+      {
+        "outer": "outer_0",
+        "val_r2": 0.7501668552429583,
+        "test_r2": 0.7379695012837046,
+        "train_time_s": 72.01430749893188
+      },
+      {
+        "outer": "outer_1",
+        "val_r2": 0.7455145901443112,
+        "test_r2": 0.7487050779042377,
+        "train_time_s": 67.24123215675354
+      },
+      {
+        "outer": "outer_2",
+        "val_r2": 0.739716643425082,
+        "test_r2": 0.7625610495806185,
+        "train_time_s": 69.6990795135498
+      },
+      {
+        "outer": "outer_3",
+        "val_r2": 0.7480328895457488,
+        "test_r2": 0.7573192177473433,
+        "train_time_s": 70.14826273918152
+      },
+      {
+        "outer": "outer_4",
+        "val_r2": 0.7559342093340485,
+        "test_r2": 0.7431327225376596,
+        "train_time_s": 68.47553205490112
+      }
+    ]
+  },
+  "streed": {
+    "parameters": {
+      "cost_complexity": 0.0001,
+      "ridge_penalty": 1e-05,
+      "lasso_penalty": 0.001
+    },
+    "mean_validation_r2": 0.7153275999946037,
+    "mean_test_r2": 0.7048454539571957,
+    "std_test_r2": 0.008026604151455525,
+    "mean_train_time_s": 599.7037266731262,
+    "max_train_time_s": 599.7139205932617,
+    "selected_folds": [
+      {
+        "outer": "outer_0",
+        "val_r2": 0.7156274341197477,
+        "test_r2": 0.6917992989829506,
+        "train_time_s": 599.7139205932617
+      },
+      {
+        "outer": "outer_1",
+        "val_r2": 0.7159829155292723,
+        "test_r2": 0.7081818799216981,
+        "train_time_s": 599.7025208473206
+      },
+      {
+        "outer": "outer_2",
+        "val_r2": 0.7153878507633188,
+        "test_r2": 0.7106973674942862,
+        "train_time_s": 599.7097795009613
+      },
+      {
+        "outer": "outer_3",
+        "val_r2": 0.7138418992842356,
+        "test_r2": 0.7109388146487083,
+        "train_time_s": 599.692351102829
+      },
+      {
+        "outer": "outer_4",
+        "val_r2": 0.7157979002764442,
+        "test_r2": 0.7026099087383352,
+        "train_time_s": 599.7000613212585
+      }
+    ]
+  },
+  "r2_advantage": 0.04509205985351705,
+  "source_claim_c4_verified": true
+}

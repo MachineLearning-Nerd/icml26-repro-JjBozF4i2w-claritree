@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "title": "Repro - CLARITree",
+  "emoji": "🎯",
+  "space_id": null,
+  "paper": "arXiv:2606.12840",
+  "tags": [
+    "icml2026-repro",
+    "paper-JjBozF4i2w"
+  ],
+  "updated_at": "2026-07-22T10:45:36+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Repro - CLARITree",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "methods",
+        "title": "Methods",
+        "file": "pages/methods/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-c1-c3",
+        "title": "Claim C1-C3",
+        "file": "pages/claim-c1-c3/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-c4",
+        "title": "Claim C4",
+        "file": "pages/claim-c4/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-c5-scope",
+        "title": "Claim C5 Scope",
+        "file": "pages/claim-c5-scope/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-c6",
+        "title": "Claim C6",
+        "file": "pages/claim-c6/page.md",
+        "children": []
+      },
+      {
+        "slug": "negative-controls",
+        "title": "Negative controls",
+        "file": "pages/negative-controls/page.md",
+        "children": []
+      },
+      {
+        "slug": "conclusion",
+        "title": "Conclusion",
+        "file": "pages/conclusion/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 1751,
+  "revision": "1784717136446371375"
+}

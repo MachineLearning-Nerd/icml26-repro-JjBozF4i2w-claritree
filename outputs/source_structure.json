@@ -1,0 +1,19 @@
+{
+  "source": "upstream/src/clari_tree.cpp",
+  "requirements": {
+    "claritree_recursive_fit": "CLARITree::recursive_fit",
+    "greedy_lookahead_call": "Greedy::recursive_fit",
+    "left_rank_one_update": "llt_left.rankUpdate(",
+    "right_rank_one_update": "llt_right.rankUpdate(",
+    "quantile_threshold_builder": "make_quantile_thresholds"
+  },
+  "matches": {
+    "claritree_recursive_fit": true,
+    "greedy_lookahead_call": true,
+    "left_rank_one_update": true,
+    "right_rank_one_update": true,
+    "quantile_threshold_builder": true
+  },
+  "source_structure_verified": true,
+  "interpretation": "The pinned implementation contains CLARITree recursion, its greedy lookahead subroutine, and both streaming rank-one Cholesky updates."
+}

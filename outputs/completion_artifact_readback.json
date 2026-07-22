@@ -1,0 +1,31 @@
+{
+  "source": "upstream/results/final.csv",
+  "selection": {
+    "outer": "mean",
+    "depth": 4,
+    "n_thresholds": 20,
+    "time_limit_s": 590.0
+  },
+  "claritree": {
+    "records": 880,
+    "completed": 880,
+    "completion_rate_percent": 100.0,
+    "minimum_train_time_s": 0.000131607055664,
+    "maximum_train_time_s": 317.1642056465149
+  },
+  "streed": {
+    "records": 1760,
+    "completed": 1232,
+    "completion_rate_percent": 70.0,
+    "minimum_train_time_s": 0.0023041725158691,
+    "maximum_train_time_s": 599.8973509788514
+  },
+  "completion_advantage_percentage_points": 30.0,
+  "source_backed_direction_verified": true,
+  "paper_rounded_endpoint_percent": {
+    "claritree": 95.0,
+    "streed": 60.0
+  },
+  "paper_rounded_endpoint_exactly_reproduced": false,
+  "interpretation": "The release supports the completion-rate advantage, but its exact plot-input endpoint is retained as evidence rather than relabelled as the paper's rounded 95%/60% values."
+}

@@ -1,0 +1,69 @@
+{
+  "paper": "JjBozF4i2w",
+  "selected_anchored_claims": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C6"
+  ],
+  "excluded_anchored_claims": {
+    "C5": "source protocol missing; see docs/C5_SCOPE_EXCLUSION.md"
+  },
+  "c6_disclosure": {
+    "exact_release_endpoint_percent": {
+      "claritree": 100.0,
+      "streed": 70.0
+    },
+    "paper_rounded_endpoint_percent": {
+      "claritree": 95.0,
+      "streed": 60.0
+    },
+    "exact_parity": false,
+    "direction_verified": true
+  },
+  "checks": {
+    "source_pins": {
+      "passed": true,
+      "detail": "{\n  \"upstream\": {\n    \"commit\": \"4397f8dbc8b63751777e7918b89972e793796dfd\",\n    \"dirty\": \"false\"\n  },\n  \"repro/vendor/eigen\": {\n    \"commit\": \"3147391d946bb4b6c68edd901f2add6ac1f31f8c\",\n    \"dirty\": \"false\"\n  }\n}"
+    },
+    "source_structure_c1": {
+      "passed": true,
+      "detail": "{\n  \"source\": \"upstream/src/clari_tree.cpp\",\n  \"requirements\": {\n    \"claritree_recursive_fit\": \"CLARITree::recursive_fit\",\n    \"greedy_lookahead_call\": \"Greedy::recursive_fit\",\n    \"left_rank_one_update\": \"llt_left.rankUpdate(\",\n    \"right_rank_one_update\": \"llt_right.rankUpdate(\",\n    \"quantile_threshold_builder\": \"make_quantile_thresholds\"\n  },\n  \"matches\": {\n    \"claritree_recursive_fit\": true,\n    \"greedy_lookahead_call\": true,\n    \"left_rank_one_update\": true,\n    \"right_rank_one_update\": true,\n    \"quantile_threshold_builder\": true\n  },\n  \"source_structure_verified\": true,\n  \"interpretation\": \"The pinned implementation contains CLARITree recursion, its greedy lookahead subroutine, and both streaming rank-one Cholesky updates.\"\n}"
+    },
+    "core_claims_c1_c3": {
+      "passed": true,
+      "detail": "3703277,\n      \"slack\": 0.0,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 1,\n      \"greedy_loss\": 6.250154451494475,\n      \"claritree_loss\": 5.337291036434288,\n      \"slack\": 0.9128634150601869,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 2,\n      \"greedy_loss\": 6.2092615832929265,\n      \"claritree_loss\": 4.438526944045815,\n      \"slack\": 1.7707346392471113,\n      \"greedy_leaves\": 2,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 3,\n      \"greedy_loss\": 14.315211662856228,\n      \"claritree_loss\": 8.998303035057635,\n      \"slack\": 5.316908627798593,\n      \"greedy_leaves\": 2,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 4,\n      \"greedy_loss\": 4.962750652429148,\n      \"claritree_loss\": 4.962750652429148,\n      \"slack\": 0.0,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 5,\n      \"greedy_loss\": 16.82344814208143,\n      \"claritree_loss\": 8.592157962775442,\n      \"slack\": 8.231290179305986,\n      \"greedy_leaves\": 2,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 6,\n      \"greedy_loss\": 7.4233039254025535,\n      \"claritree_loss\": 7.4233039254025535,\n      \"slack\": 0.0,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 7,\n      \"greedy_loss\": 8.505540623237662,\n      \"claritree_loss\": 8.505540623237662,\n      \"slack\": 0.0,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 8,\n      \"greedy_loss\": 5.534629443249699,\n      \"claritree_loss\": 5.534629443249699,\n      \"slack\": 0.0,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    },\n    {\n      \"seed\": 9,\n      \"greedy_loss\": 7.330555327496852,\n      \"claritree_loss\": 7.330555327496852,\n      \"slack\": 0.0,\n      \"greedy_leaves\": 3,\n      \"claritree_leaves\": 3\n    }\n  ],\n  \"dominance_min_slack\": 0.0,\n  \"dominance_strict_cases\": 4,\n  \"negative_control\": {\n    \"train_mse\": 2.824527186410159,\n    \"train_r2\": 0.3202856212898849\n  }\n}"
+    },
+    "theorem_consequences_c2_c3": {
+      "passed": true,
+      "detail": "{\n  \"theorem_5_1_runtime_expression\": \"O(k*n*log(n) + d^2*n*k^4*T)\",\n  \"runtime_component_doubling_ratios\": {\n    \"n\": 2.0,\n    \"d\": 4.0,\n    \"k\": 16.0,\n    \"thresholds\": 2.0\n  },\n  \"runtime_expression_verified\": true,\n  \"c3_gap_epsilon_count\": 200,\n  \"c3_smallest_gap_margin\": 0.010204081632653073,\n  \"c3_gap_inequality_verified\": true,\n  \"interpretation\": \"For every tested epsilon in (0, 1/2), the proof's displayed (1-epsilon)/(2epsilon) lower ratio strictly exceeds 1/(4epsilon).\"\n}"
+    },
+    "california_c4": {
+      "passed": true,
+      "detail": "12837046,\n        \"train_time_s\": 72.01430749893188\n      },\n      {\n        \"outer\": \"outer_1\",\n        \"val_r2\": 0.7455145901443112,\n        \"test_r2\": 0.7487050779042377,\n        \"train_time_s\": 67.24123215675354\n      },\n      {\n        \"outer\": \"outer_2\",\n        \"val_r2\": 0.739716643425082,\n        \"test_r2\": 0.7625610495806185,\n        \"train_time_s\": 69.6990795135498\n      },\n      {\n        \"outer\": \"outer_3\",\n        \"val_r2\": 0.7480328895457488,\n        \"test_r2\": 0.7573192177473433,\n        \"train_time_s\": 70.14826273918152\n      },\n      {\n        \"outer\": \"outer_4\",\n        \"val_r2\": 0.7559342093340485,\n        \"test_r2\": 0.7431327225376596,\n        \"train_time_s\": 68.47553205490112\n      }\n    ]\n  },\n  \"streed\": {\n    \"parameters\": {\n      \"cost_complexity\": 0.0001,\n      \"ridge_penalty\": 1e-05,\n      \"lasso_penalty\": 0.001\n    },\n    \"mean_validation_r2\": 0.7153275999946037,\n    \"mean_test_r2\": 0.7048454539571957,\n    \"std_test_r2\": 0.008026604151455525,\n    \"mean_train_time_s\": 599.7037266731262,\n    \"max_train_time_s\": 599.7139205932617,\n    \"selected_folds\": [\n      {\n        \"outer\": \"outer_0\",\n        \"val_r2\": 0.7156274341197477,\n        \"test_r2\": 0.6917992989829506,\n        \"train_time_s\": 599.7139205932617\n      },\n      {\n        \"outer\": \"outer_1\",\n        \"val_r2\": 0.7159829155292723,\n        \"test_r2\": 0.7081818799216981,\n        \"train_time_s\": 599.7025208473206\n      },\n      {\n        \"outer\": \"outer_2\",\n        \"val_r2\": 0.7153878507633188,\n        \"test_r2\": 0.7106973674942862,\n        \"train_time_s\": 599.7097795009613\n      },\n      {\n        \"outer\": \"outer_3\",\n        \"val_r2\": 0.7138418992842356,\n        \"test_r2\": 0.7109388146487083,\n        \"train_time_s\": 599.692351102829\n      },\n      {\n        \"outer\": \"outer_4\",\n        \"val_r2\": 0.7157979002764442,\n        \"test_r2\": 0.7026099087383352,\n        \"train_time_s\": 599.7000613212585\n      }\n    ]\n  },\n  \"r2_advantage\": 0.04509205985351705,\n  \"source_claim_c4_verified\": true\n}"
+    },
+    "completion_c6": {
+      "passed": true,
+      "detail": "{\n  \"source\": \"upstream/results/final.csv\",\n  \"selection\": {\n    \"outer\": \"mean\",\n    \"depth\": 4,\n    \"n_thresholds\": 20,\n    \"time_limit_s\": 590.0\n  },\n  \"claritree\": {\n    \"records\": 880,\n    \"completed\": 880,\n    \"completion_rate_percent\": 100.0,\n    \"minimum_train_time_s\": 0.000131607055664,\n    \"maximum_train_time_s\": 317.1642056465149\n  },\n  \"streed\": {\n    \"records\": 1760,\n    \"completed\": 1232,\n    \"completion_rate_percent\": 70.0,\n    \"minimum_train_time_s\": 0.0023041725158691,\n    \"maximum_train_time_s\": 599.8973509788514\n  },\n  \"completion_advantage_percentage_points\": 30.0,\n  \"source_backed_direction_verified\": true,\n  \"paper_rounded_endpoint_percent\": {\n    \"claritree\": 95.0,\n    \"streed\": 60.0\n  },\n  \"paper_rounded_endpoint_exactly_reproduced\": false,\n  \"interpretation\": \"The release supports the completion-rate advantage, but its exact plot-input endpoint is retained as evidence rather than relabelled as the paper's rounded 95%/60% values.\"\n}"
+    },
+    "tests": {
+      "passed": true,
+      "detail": ".........                                                                [100%]\n9 passed in 0.43s"
+    },
+    "cpu_demo_memory_calibration": {
+      "passed": true,
+      "detail": "retained pinned CPU calibration artifact is valid"
+    },
+    "cpu_fixed_split_c4_calibration": {
+      "passed": true,
+      "detail": "fixed-split test_r2 matches committed outer_4 result (0.743132723)"
+    },
+    "c5_scope_exclusion": {
+      "passed": true,
+      "detail": "docs/C5_SCOPE_EXCLUSION.md"
+    }
+  },
+  "tests_passed": true,
+  "publication_gate_passed": true
+}
