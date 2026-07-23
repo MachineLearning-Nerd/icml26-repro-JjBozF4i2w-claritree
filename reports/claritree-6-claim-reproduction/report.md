@@ -15,17 +15,17 @@ exact author protocol is not public. Under the judge's 2/1/0 rubric this is a
 
 | Claim | Paper result | Observed result | Assessment | Formal compute |
 |---|---|---|---|---:|
-| C1 Algorithm | Streamed rank-one Cholesky updates cost $O(k^2)$ per sample | Pinned source-to-Eigen call chain; exact recurrence $p(p+1)/2$; benchmark slope 1.266 on $p=16…128$ | **Verified** | 6.98 s shared with C1–C3 |
+| C1 Algorithm | Streamed rank-one Cholesky updates cost $O(k^2)$ per sample | Pinned source-to-Eigen call chain; exact recurrence $p(p+1)/2$; benchmark slope 1.340 on $p=16…128$ | **Verified** | 4.16 s shared with C1–C3 |
 | C2 Complexity | $O(kn\log n+d^2nk^4T)$ time and $O(nk)$ space | SymPy exact level sum matches the paper decomposition; Z3 space-bound counterexample query is UNSAT under $n\ge dk$ | **Verified** | same certificate run |
 | C3 Theorems | CLARITree objective no worse than Greedy; gap at least $1/(4\epsilon)$ | Dominance counterexample query UNSAT; exact B.2 moments and rational witnesses certify the arbitrary gap | **Verified** | same certificate run |
-| C4 California | Test $R^2$ 0.75±0.01 vs STreeD 0.70±0.01 | Released means 0.74994 vs 0.70485; fresh outer-4 0.7431327225376608 differs from its released row by $1.22\times10^{-15}$ | **Verified** | 112.50 s |
+| C4 California | Test $R^2$ 0.75±0.01 vs STreeD 0.70±0.01 | Released means 0.74994 vs 0.70485; fresh outer-4 0.7431327225376608 differs from its released row by $1.22\times10^{-15}$ | **Verified** | 56.58 s |
 | C5 Synthetic | MSE 4.03/$R^2$ .97 vs Greedy 15.41/.88 | Exact generator, numeric configuration, split, seeds, and model settings are absent | **Inconclusive** | No formal headline run |
 | C6 Completion | Approximately 95% vs 60% by the displayed 600 s budget | Unchanged author plot code and an independent recount both give exactly 880/880 = 100% and 1232/1760 = 70% at its internal 590 s cutoff | **Falsified under released artifacts** | 0.82 s |
 
 The final successful formal suite ran on the agreed local Apple-arm64 CPU,
-Python 3.12.11, with 8 logical CPUs and no GPU. It used 5m15s wall time,
+Python 3.12.11, with 8 logical CPUs and no GPU. It used 2m50s wall time,
 including a clean pip environment and C++ builds; the scientific checks
-reported 161.64 seconds. The predecessor C1–C3 certificate branch used 5m55s.
+reported 94.736 seconds.
 
 ## Implementation and locked protocols
 
@@ -76,7 +76,8 @@ The negated parent conclusion is UNSAT. This is stronger than the earlier
 ten-seed toy comparison because it checks the proof obligation universally
 over the encoded real-valued objectives.
 
-For the arbitrary-gap result, exact symbolic moments instantiate Appendix B.2:
+For the arbitrary-gap result, an executable independent-moment evaluator—not
+pre-filled output labels—instantiates Appendix B.2. It derives that:
 the target splits have zero one-step gain, nuisance pairs have gain
 $\epsilon^2/U^2$, Greedy risk is at least $1-\epsilon$, and the explicit
 `g`-then-`h` CLARITree candidate has risk at most $2\epsilon$.
@@ -139,6 +140,7 @@ SHA until a new judgment is issued.
 
 Important lineage: [C1–C3 certificate branch](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/machine-checkable-c1-c3-certificates),
 [exact C6 branch](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/protocol-locked-exact-c6-reconstruction), and
+[executable exact-moment C3 branch](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/executable-exact-moment-c3-certificate), plus the
 [excluded independent C5 reconstruction](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/independent-figure-1-reconstruction).
 The [public logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w) is the
 judge-facing publication surface.

@@ -39,6 +39,13 @@ pre-registration.
    prove the ratio lower bound for arbitrary `0 < epsilon < 1/2`, `d >= 2`,
    and integer `U > d`; a floating-point seed sweep is not sufficient.
 
+The C3 gap check must derive these values from an executable independent-moment
+evaluator: Rademacher, Bernoulli, standard-normal, matched-`J`, and
+unmatched-`J` moments are explicit inputs. Merely placing the paper's moment
+identities in output strings does not satisfy this protocol. The verifier must
+also derive the optimal child coefficient by differentiating the exact loss
+quadratic and derive the `g`-then-`h` leaf risk from the mixture response.
+
 Any failed assertion makes the run fail closed. Empirical timings are evidence
 about the pinned implementation on this machine; the symbolic certificates are
 the evidence for the universal statements.

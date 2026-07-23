@@ -60,7 +60,7 @@ def headline() -> None:
 
 def rank_update() -> None:
     dimensions = np.array([4, 8, 16, 32, 64, 96, 128])
-    nanoseconds = np.array([98.8782, 189.6973, 498.9547, 907.9764, 2142.6325, 3982.5210, 7226.5418])
+    nanoseconds = np.array([59.1379, 110.6189, 232.4884, 516.8313, 1275.3073, 2322.8335, 3882.5938])
     fit = dimensions >= 16
     slope, intercept = np.polyfit(np.log(dimensions[fit]), np.log(nanoseconds[fit]), 1)
     curve = np.exp(intercept) * dimensions**slope

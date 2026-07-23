@@ -15,7 +15,7 @@
       "source_call_chain_verified": true,
       "rank_update_recurrence": "p*(p+1)/2",
       "polynomial_degree": 2,
-      "pinned_eigen_benchmark_slope": 1.266374640236109
+      "pinned_eigen_benchmark_slope": 1.340039762622664
     },
     "C2": {
       "assessment": "verified",

@@ -55,7 +55,7 @@ def _():
     claim_rows = {
         "C1 · Algorithm": {
             "paper": "Streamed rank-one Cholesky updates cost O(k²) per sample.",
-            "observed": "Pinned source-to-Eigen call chain; exact recurrence p(p+1)/2; compiled benchmark slope 1.266 on p=16…128.",
+            "observed": "Pinned source-to-Eigen call chain; exact recurrence p(p+1)/2; compiled benchmark slope 1.340 on p=16…128.",
             "assessment": "Verified",
             "color": "#2a9d68",
         },
@@ -132,9 +132,9 @@ def _(mo):
     2. SymPy derives the complete per-level sum, rather than checking exponents
        in a transcribed expression. Z3 proves the stated space reduction within
        the theorem's $n\ge dk$ regime by finding the negated condition UNSAT.
-    3. Z3 checks the universal dominance induction obligation. Exact symbolic
-       moments instantiate the paper's B.2 distribution and prove the risk gap
-       for every $0<\epsilon<1/2$.
+    3. Z3 checks the universal dominance induction obligation. An executable
+       independent-moment evaluator derives the B.2 cross-moments, nuisance
+       gain, and two risk bounds, proving the gap for every $0<\epsilon<1/2$.
 
     ## Direct and artifact-based numeric evidence
 

@@ -23,9 +23,9 @@ The earlier C5 reconstruction substituted `n=1000`, an 80/20 split, `k=G=4`,
 `rho=.5`, `sigma=2`, seeds 0–4, depth 2, 20 thresholds, and fixed penalties;
 it is now explicitly excluded from formal C5 evidence.
 
-The final successful suite used 5m15s wall time including a clean environment
-and C++ builds (161.64 s reported scientific checks). The predecessor C1–C3
-certificate run used 5m55s. The official public judge record is still **4/12**
+The final successful suite used 2m50s wall time including a clean environment
+and C++ builds (94.736 s reported scientific checks). The official public judge
+record is still **4/12**
 at judged Space SHA `e6300f190cfe8da733d5dbec071b75a665d1670b` until a rejudge
 consumes the updated publication.
 
@@ -43,6 +43,7 @@ consumes the updated publication.
 | [`main`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/main) | README, report, figures, notebook, and reproducibility code | Not run as an experiment (publication surface) | Publishes evidence produced on immutable experiment branches | No experiment compute |
 | [`machine-checkable-c1-c3-certificates`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/machine-checkable-c1-c3-certificates) | Add source instrumentation, symbolic identities, Z3 queries, exact B.2 witnesses, and a pinned Eigen benchmark | `bash repro/run_local_claim_suite.sh` | C1, C2, and C3 verified; full inherited suite completed | Local CPU; 5m55s wall |
 | [`protocol-locked-exact-c6-reconstruction`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/protocol-locked-exact-c6-reconstruction) | Execute unchanged author plot semantics and exact independent recount under a locked tolerance | `bash repro/run_local_claim_suite.sh` | C1–C4 verified; C6 falsified under released artifacts; C5 inconclusive; projected 10/12 | Local CPU; 5m15s wall |
+| [`executable-exact-moment-c3-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/executable-exact-moment-c3-certificate) | Replace asserted C3 moment labels with executable exact derivations while retaining all prior gates | `bash repro/run_local_claim_suite.sh` | Final formal suite: all certificates pass; honest projection remains 10/12 because C5 is unresolved | Local CPU; 2m50s wall |
 | [`independent-figure-1-reconstruction`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/independent-figure-1-reconstruction) | Test a declared substitute for the missing C5 protocol | `bash repro/run_local_claim_suite.sh` | Supplementary direction check only; excluded from the C5 verdict | Local CPU; 7m22s wall |
 
 ## Reproduce the formal evidence
