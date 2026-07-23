@@ -19,6 +19,27 @@ new experimental protocol. It may be useful as clearly-labelled supplementary
 work, but must never be presented as an unmodified author-source reproduction
 or used to claim exact parity with `4.03`/`15.41`.
 
+## Release audit and decision rule
+
+The audit covered the pinned `main` commit, the repository's complete public
+commit history, its `release/pypi` branch, tag `v0.1.1`, public releases and
+assets, the sole public fork and all of its branches, the paper source, and
+targeted public searches for the headline values and generator. The released
+`scripts/images/teaser/teaser_summary.csv` is a real-dataset teaser summary,
+not the Figure 1 synthetic experiment. No exact protocol or headline artifact
+was found.
+
+Under the user-selected **require author protocol** rule, C5 remains
+`inconclusive` and the independent reconstruction is excluded from scoring.
+The claim can move to verified or falsified only if the authors provide either:
+
+1. executable generator code plus all numeric parameters, train/test split,
+   seeds, CLARITree/Greedy settings, and evaluation code; or
+2. the generated train/test data and raw predictions with enough metadata to
+   machine-check the reported MSE and R² values.
+
+Retrofitting missing values to match the published result is not admissible.
+
 Paper-source audit hashes (arXiv `2606.12840` source):
 
 | File | SHA-256 |

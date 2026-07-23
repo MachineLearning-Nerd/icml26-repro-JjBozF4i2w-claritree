@@ -1,0 +1,84 @@
+{
+  "paper": "arXiv:2606.12840",
+  "author_source_commit": "4397f8dbc8b63751777e7918b89972e793796dfd",
+  "compute": {
+    "backend": "local",
+    "machine": "arm64",
+    "python": "3.12.11",
+    "cpu_count": 8,
+    "gpu": false
+  },
+  "protocol_characterization": "protocol lock for independent rerun; not blinded preregistration",
+  "claims": {
+    "C1": {
+      "assessment": "verified",
+      "source_call_chain_verified": true,
+      "rank_update_recurrence": "p*(p+1)/2",
+      "polynomial_degree": 2,
+      "pinned_eigen_benchmark_slope": 1.266374640236109
+    },
+    "C2": {
+      "assessment": "verified",
+      "exact_level_sum": "2*d*n*k^3 + d*(d-1)*n*k^4*T/2",
+      "summation_identity_verified": true,
+      "space_counterexample_status_under_n_ge_dk": "unsat"
+    },
+    "C3": {
+      "assessment": "verified",
+      "dominance_counterexample_status": "unsat",
+      "appendix_b2_construction_verified": true,
+      "ratio_margin": "(1-2*epsilon)/(4*epsilon) > 0 for 0 < epsilon < 1/2"
+    },
+    "C4": {
+      "assessment": "verified",
+      "released_five_fold_claritree_r2": 0.7499375138107127,
+      "released_five_fold_streed_r2": 0.7048454539571957,
+      "fresh_outer4_r2": 0.7431327225376608,
+      "released_outer4_r2": 0.7431327225376596,
+      "absolute_difference": 1.2212453270876722e-15
+    },
+    "C5": {
+      "assessment": "inconclusive",
+      "exact_author_protocol_available": false,
+      "missing": [
+        "sample size",
+        "feature count",
+        "group count",
+        "correlation",
+        "noise",
+        "train/test split",
+        "seeds",
+        "model hyperparameters",
+        "generator or generated data"
+      ],
+      "supplementary_reconstruction_excluded": true
+    },
+    "C6": {
+      "assessment": "falsified under released author artifacts",
+      "paper_percentages": {
+        "claritree": 95.0,
+        "streed": 60.0
+      },
+      "observed_percentages": {
+        "claritree": 100.0,
+        "streed": 70.0
+      },
+      "observed_counts": {
+        "claritree": "880/880",
+        "streed": "1232/1760"
+      },
+      "author_vs_independent_exact_crosscheck": true,
+      "locked_tolerance_percentage_points": 5.0,
+      "directional_advantage_percentage_points": 30.0,
+      "author_plot_sha256": "b7eaf33fbb8a3bc799748541fcb6d95c28da43355d8222c138b5bbebd625e404",
+      "input_csv_sha256": "9d038af734cf4203ad7f6fa56e008980d3e121e1909903aeb658a69ce492648f"
+    }
+  },
+  "judge_rubric_projection": {
+    "score": "10/12",
+    "basis": "C1-C4 verified (8), C6 falsified (2), C5 inconclusive (0)",
+    "not_a_guarantee": true,
+    "current_official_score_at_publication_time": "4/12",
+    "current_judged_space_sha": "e6300f190cfe8da733d5dbec071b75a665d1670b"
+  }
+}

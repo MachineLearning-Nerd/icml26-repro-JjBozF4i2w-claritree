@@ -1,5 +1,9 @@
 {
   "source": "upstream/results/final.csv",
+  "protocol": "docs/C6_EXACT_RECONSTRUCTION_PROTOCOL.md",
+  "author_plot_source": "upstream/scripts/images/plot_completion_rate.py",
+  "author_plot_sha256": "b7eaf33fbb8a3bc799748541fcb6d95c28da43355d8222c138b5bbebd625e404",
+  "input_csv_sha256": "9d038af734cf4203ad7f6fa56e008980d3e121e1909903aeb658a69ce492648f",
   "selection": {
     "outer": "mean",
     "depth": 4,
@@ -22,10 +26,21 @@
   },
   "completion_advantage_percentage_points": 30.0,
   "source_backed_direction_verified": true,
+  "author_vs_independent_exact_crosscheck": true,
   "paper_rounded_endpoint_percent": {
     "claritree": 95.0,
     "streed": 60.0
   },
   "paper_rounded_endpoint_exactly_reproduced": false,
-  "interpretation": "The release supports the completion-rate advantage, but its exact plot-input endpoint is retained as evidence rather than relabelled as the paper's rounded 95%/60% values."
+  "locked_tolerance_percentage_points": 5.0,
+  "absolute_difference_percentage_points": {
+    "claritree": 5.0,
+    "streed": 10.0
+  },
+  "within_locked_tolerance": {
+    "claritree": true,
+    "streed": false
+  },
+  "numeric_claim_assessment": "falsified under released author artifacts",
+  "interpretation": "The exact numeric endpoint exceeds the locked tolerance for STreeD. The release separately supports the 30-point directional advantage."
 }

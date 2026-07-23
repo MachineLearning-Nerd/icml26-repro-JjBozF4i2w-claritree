@@ -2,7 +2,7 @@
 
 ## Current step
 
-`publication_queued:awaiting-shared-drain-space-readback`
+`judge_ready_evidence:publication_in_progress`
 
 ## Completed
 
@@ -41,11 +41,25 @@
   controls, methods, and conclusion.
 - Created and pushed the public GitHub handoff:
   `MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree@7b261a2`.
+- Added protocol-locked, machine-checkable C1--C3 certificates. The pinned
+  source call chain and exact rank-update recurrence verify C1; SymPy and Z3
+  verify the C2 level sum and space implication; Z3 plus exact Appendix B.2
+  moments and rational witnesses verify C3.
+- Executed the exact C6 author plot path under a locked tolerance. The
+  unchanged author code and independent recount agree on CLARITree `100%`
+  (880/880) and STreeD `70%` (1232/1760). The 10-point STreeD discrepancy
+  exceeds the locked +/-5-point tolerance, so C6 is falsified under the
+  released author artifacts while its directional advantage is supported.
+- Exhaustively audited the public C5 release surface. The exact Figure 1
+  protocol remains unavailable, so the supplementary reconstruction is
+  excluded under the require-author-protocol rule.
 
 ## Next actions
 
-1. Wait for the shared publisher to create/read back the Hugging Face Space,
-   then record its public SHA and tags here and in the registry.
+1. Publish the updated GitHub report/notebook and synchronize the judge-facing
+   Hugging Face logbook.
+2. Request the exact Figure 1 protocol from the authors. This is the only known
+   path from the honest 10/12 projection to defensible 12/12 evidence.
 
 ## Gate state
 
@@ -62,10 +76,10 @@ pinned driver entrypoint and exactly reproduced outer-4 `test_r2`
 `6a609d9713e6ef894d54b64f` failed before fitting because it invoked absent
 `pip` rather than UV's installer; it is not evidence.
 
-The current gate is affirmative for the five selected anchored claims C1, C2,
-C3, C4, and C6. C6 is published only with its exact release values (100% vs
-70%) and the paper's rounded 95%/60% wording disclosed. C5 remains explicitly
-excluded as a non-runnable source protocol.
+The current evidence resolves C1--C4 as verified and C6 as falsified under the
+released author artifacts. C5 remains inconclusive because it is not a
+runnable author protocol. This projects to 10/12 under the judge rubric; it is
+not a guaranteed score until a new judge record is issued.
 
 FULL_GATE_READY: JjBozF4i2w
 
