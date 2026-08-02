@@ -11,7 +11,12 @@ repro/vendor/eigen/
 outputs/eigen-cmake/
 outputs/eigen-install/
 outputs/run_tree
+outputs/benchmark_rank_update
 outputs/*.so
+GATE_REPORT.json
+style_check.json
+poster_preview.pdf
+poster_preview.png
 
 # Trackio runtime scratch; retain the logbook and metadata.
 .trackio/logbook/.sync_*

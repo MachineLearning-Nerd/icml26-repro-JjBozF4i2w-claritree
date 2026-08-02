@@ -95,12 +95,19 @@ def rank_update_work_certificate() -> dict[str, object]:
     # the order, so this exact visit count is a conservative operation proxy.
     visits = sp.simplify(sp.summation(1 + (p - i - 1), (i, 0, p - 1)))
     expected = p * (p + 1) / 2
+    full_refactor_visits = sp.simplify(sp.summation((p - i) ** 2, (i, 0, p - 1)))
     return {
         "regression_dimension": "p = k + 1 (intercept included)",
         "exact_recurrence_visits": str(visits),
         "identity_verified": bool(sp.simplify(visits - expected) == 0),
         "polynomial_degree_in_p": int(sp.Poly(visits, p).degree()),
         "per_sample_order": "Theta(p^2) = Theta(k^2)",
+        "condition_relaxing_control": {
+            "replacement": "full Cholesky refactorization after every sample",
+            "exact_dense_work_proxy": str(full_refactor_visits),
+            "polynomial_degree_in_p": int(sp.Poly(full_refactor_visits, p).degree()),
+            "quadratic_property_lost": int(sp.Poly(full_refactor_visits, p).degree()) == 3,
+        },
     }
 
 
@@ -131,7 +138,15 @@ def benchmark_rank_update() -> dict[str, object]:
     fitted_times = np.array([medians[int(value)] for value in fitted_dimensions], dtype=float)
     slope = float(np.polyfit(np.log(fitted_dimensions), np.log(fitted_times), 1)[0])
     return {
-        "compile_command": compile_command,
+        "compile_command": [
+            "c++",
+            "-std=c++17",
+            "-O3",
+            "-Irepro/vendor/eigen",
+            "repro/cpp/benchmark_rank_update.cpp",
+            "-o",
+            "outputs/benchmark_rank_update",
+        ],
         "measurements": [
             {
                 "dimension": dimension,
@@ -167,6 +182,11 @@ def runtime_space_certificate() -> dict[str, object]:
     space_solver.add(exact_space > 4 * zn * zk)
     space_status = space_solver.check()
 
+    relaxed_space_solver = Solver()
+    relaxed_space_solver.add(zn == 1, zd == 2, zk == 2)
+    relaxed_space_solver.add(exact_space > 4 * zn * zk)
+    relaxed_space_status = relaxed_space_solver.check()
+
     return {
         "exact_level_sum": str(exact_level_sum),
         "paper_decomposition": str(paper_decomposition),
@@ -185,6 +205,14 @@ def runtime_space_certificate() -> dict[str, object]:
         "space_upper_bound": "4*n*k",
         "space_counterexample_status": str(space_status),
         "space_bound_z3_verified": space_status != sat,
+        "condition_relaxing_control": {
+            "removed_assumption": "n >= d*k",
+            "witness": {"n": 1, "d": 2, "k": 2},
+            "exact_space_proxy": 13,
+            "claimed_4nk_bound": 8,
+            "counterexample_status": str(relaxed_space_status),
+            "bound_fails_outside_regime": relaxed_space_status == sat,
+        },
     }
 
 
@@ -391,6 +419,25 @@ def arbitrary_gap_certificate() -> dict[str, object]:
             "(1-2*epsilon)/(4*epsilon) > 0 exactly when 0 < epsilon < 1/2"
         ),
         "exact_rational_witnesses": witnesses,
+        "condition_relaxing_controls": {
+            "epsilon": {
+                "value": "3/4",
+                "violated_assumption": "epsilon < 1/2",
+                "ratio_margin_over_1/(4*epsilon)": str(
+                    ratio_margin.subs(epsilon, sp.Rational(3, 4))
+                ),
+                "strict_ratio_bound_fails": bool(
+                    ratio_margin.subs(epsilon, sp.Rational(3, 4)) < 0
+                ),
+            },
+            "nuisance_pairs": {
+                "depth": 4,
+                "U": 4,
+                "violated_assumption": "U > d",
+                "unresolved_pairs_after_d_splits": 0,
+                "greedy_path_guarantee_lost": True,
+            },
+        },
         "construction_certificate_verified": (
             all(value == "0" for value in target_cross_moments.values())
             and all(
@@ -433,17 +480,29 @@ def summarize() -> dict[str, object]:
         "rank_update_degree_two": (
             payload["c1_rank_update_work"]["polynomial_degree_in_p"] == 2
         ),
+        "rank_update_control_degree_three": payload["c1_rank_update_work"][
+            "condition_relaxing_control"
+        ]["quadratic_property_lost"],
         "rank_update_benchmark": payload["c1_eigen_benchmark"][
             "empirical_quadratic_scaling_consistent"
         ],
         "runtime_sum": payload["c2_runtime_space"]["summation_identity_verified"],
         "space_z3": payload["c2_runtime_space"]["space_bound_z3_verified"],
+        "space_relaxed_control": payload["c2_runtime_space"][
+            "condition_relaxing_control"
+        ]["bound_fails_outside_regime"],
         "dominance_z3": payload["c3_dominance"][
             "dominance_induction_step_verified"
         ],
         "gap_construction": payload["c3_arbitrary_gap"][
             "construction_certificate_verified"
         ],
+        "gap_relaxed_controls": (
+            payload["c3_arbitrary_gap"]["condition_relaxing_controls"]["epsilon"]
+            ["strict_ratio_bound_fails"]
+            and payload["c3_arbitrary_gap"]["condition_relaxing_controls"]
+            ["nuisance_pairs"]["greedy_path_guarantee_lost"]
+        ),
     }
     payload["checks"] = checks
     payload["all_certificates_verified"] = all(checks.values())

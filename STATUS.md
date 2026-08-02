@@ -2,7 +2,7 @@
 
 ## Current step
 
-`judge_ready_evidence:publication_in_progress`
+`published:awaiting_judge`
 
 ## Completed
 
@@ -53,12 +53,19 @@
 - Exhaustively audited the public C5 release surface. The exact Figure 1
   protocol remains unavailable, so the supplementary reconstruction is
   excluded under the require-author-protocol rule.
+- Passed the exact current challenge validator and an outcome-blind clean-packet
+  review at 10/12: C1--C4 verified, C6 falsified at full released scope, and C5
+  blocked by absent essential author material.
+- Published the additive text-only Hugging Face candidate at
+  `a45ab5063011ae58c97d78c3f6e3bc348b98d262`. All 12 changed paths were
+  byte-verified from that exact revision; all 19 baseline paths remain present,
+  and every untouched baseline path remains byte-identical.
 
 ## Next actions
 
-1. Publish the updated GitHub report/notebook and synchronize the judge-facing
-   Hugging Face logbook.
-2. Request the exact Figure 1 protocol from the authors. This is the only known
+1. Mirror the exact published text paths and strengthened reproduction files to
+   GitHub, then reconcile the live judge result.
+2. Obtain the exact Figure 1 protocol from the authors. This is the only known
    path from the honest 10/12 projection to defensible 12/12 evidence.
 
 ## Gate state
@@ -83,9 +90,10 @@ not a guaranteed score until a new judge record is issued.
 
 FULL_GATE_READY: JjBozF4i2w
 
-The atomic canonical-backlog handoff completed on 2026-07-22 after the public
-GitHub push at `04ba48c8ebf2050a2287bc148db719ecbd155579`. The shared drain is
-the sole Hugging Face publisher; do not create a competing Space manually.
+The official live judged baseline remains 4/12 at
+`34a4aa65b3930afa8f82009a442a5bcadd9937af`. The verified candidate at
+`a45ab5063011ae58c97d78c3f6e3bc348b98d262` is awaiting judge; its projected
+10/12 is not banked leaderboard credit.
 
 ## Scope guard
 

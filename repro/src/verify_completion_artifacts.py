@@ -25,7 +25,9 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 FINAL_CSV = ROOT / "upstream/results/final.csv"
 AUTHOR_PLOT = ROOT / "upstream/scripts/images/plot_completion_rate.py"
-TIME_LIMIT_S = 590.0
+AUTHOR_TABLE = ROOT / "upstream/scripts/tables/table_linear.py"
+AUTHOR_TIME_LIMIT_S = 590.0
+DISPLAY_TIME_LIMIT_S = 600.0
 METHODS = ("claritree", "streed")
 PAPER_ENDPOINT = {"claritree": 95.0, "streed": 60.0}
 TOLERANCE_PERCENTAGE_POINTS = 5.0
@@ -114,7 +116,7 @@ def savefig(path, *args, **kwargs):
         if set(counts) != set(METHODS):
             raise RuntimeError(f"could not parse author endpoint counts: {completed.stdout}")
         return {
-            "command": [sys.executable, str(AUTHOR_PLOT)],
+            "command": ["python", "upstream/scripts/images/plot_completion_rate.py"],
             "stdout": completed.stdout,
             "counts": counts,
             "pdf_generated": True,
@@ -134,12 +136,14 @@ def source_plot_rows() -> pd.DataFrame:
     ].copy()
 
 
-def endpoint(rows: pd.DataFrame, method: str) -> dict[str, float | int]:
+def endpoint(
+    rows: pd.DataFrame, method: str, time_limit_s: float
+) -> dict[str, float | int]:
     times = rows.loc[rows["method"].eq(method), "train_time_s"].dropna()
     times = times[times > 0]
     if times.empty:
         raise ValueError(f"no positive training times for {method}")
-    completed = int((times <= TIME_LIMIT_S).sum())
+    completed = int((times <= time_limit_s).sum())
     total = int(times.size)
     return {
         "records": total,
@@ -150,12 +154,61 @@ def endpoint(rows: pd.DataFrame, method: str) -> dict[str, float | int]:
     }
 
 
+def author_timeout_contract() -> dict[str, object]:
+    plot_source = AUTHOR_PLOT.read_text(encoding="utf-8")
+    table_source = AUTHOR_TABLE.read_text(encoding="utf-8")
+    required_plot_tokens = {
+        "operational_limit": "TIME_LIMIT = 590",
+        "displayed_limit": "DISPLAY_TIME_LIMIT = 600",
+        "completion_rule": "completed = np.sum(times <= TIME_LIMIT)",
+        "display_label": "label=f\"Time Limit ({DISPLAY_TIME_LIMIT}s)\"",
+    }
+    plot_matches = {
+        name: token in plot_source for name, token in required_plot_tokens.items()
+    }
+    table_matches = {
+        "operational_limit": "TIME_LIMIT = 590.0" in table_source,
+        "timeout_rule": 'row["train_time_s_mean"] > TIME_LIMIT' in table_source,
+        "timeout_legend": "`*` marks timeout" in table_source,
+    }
+    return {
+        "plot_source": str(AUTHOR_PLOT.relative_to(ROOT)),
+        "plot_sha256": sha256(AUTHOR_PLOT),
+        "table_source": str(AUTHOR_TABLE.relative_to(ROOT)),
+        "table_sha256": sha256(AUTHOR_TABLE),
+        "plot_matches": plot_matches,
+        "table_matches": table_matches,
+        "contract_verified": all(plot_matches.values()) and all(table_matches.values()),
+        "interpretation": (
+            "The release operationally marks times above 590 seconds as timeouts "
+            "while labelling that boundary as the 600-second budget."
+        ),
+    }
+
+
 def summarize() -> dict[str, object]:
     author_execution = run_author_plot()
+    timeout_contract = author_timeout_contract()
     rows = source_plot_rows()
-    claritree = endpoint(rows, "claritree")
-    streed = endpoint(rows, "streed")
+    claritree = endpoint(rows, "claritree", AUTHOR_TIME_LIMIT_S)
+    streed = endpoint(rows, "streed", AUTHOR_TIME_LIMIT_S)
     independent = {"claritree": claritree, "streed": streed}
+    literal_display_cutoff = {
+        method: endpoint(rows, method, DISPLAY_TIME_LIMIT_S) for method in METHODS
+    }
+    timeout_sentinel_band = {
+        method: int(
+            (
+                rows.loc[rows["method"].eq(method), "train_time_s"].gt(
+                    AUTHOR_TIME_LIMIT_S
+                )
+                & rows.loc[rows["method"].eq(method), "train_time_s"].le(
+                    DISPLAY_TIME_LIMIT_S
+                )
+            ).sum()
+        )
+        for method in METHODS
+    }
     exact_crosscheck = all(
         author_execution["counts"][method]["completed"] == independent[method]["completed"]
         and author_execution["counts"][method]["records"] == independent[method]["records"]
@@ -176,9 +229,9 @@ def summarize() -> dict[str, object]:
     }
     numeric_assessment = (
         "verified"
-        if exact_crosscheck and all(within_tolerance.values())
+        if exact_crosscheck and timeout_contract["contract_verified"] and all(within_tolerance.values())
         else "falsified under released author artifacts"
-        if exact_crosscheck
+        if exact_crosscheck and timeout_contract["contract_verified"]
         else "inconclusive"
     )
     return {
@@ -191,12 +244,27 @@ def summarize() -> dict[str, object]:
             "outer": "mean",
             "depth": 4,
             "n_thresholds": 20,
-            "time_limit_s": TIME_LIMIT_S,
+            "author_operational_time_limit_s": AUTHOR_TIME_LIMIT_S,
+            "displayed_budget_s": DISPLAY_TIME_LIMIT_S,
         },
         "claritree": claritree,
         "streed": streed,
         "author_script_execution": author_execution,
+        "author_timeout_contract": timeout_contract,
         "author_vs_independent_exact_crosscheck": exact_crosscheck,
+        "condition_relaxing_control": {
+            "rule": "naively count every recorded time <= the displayed 600-second label",
+            "literal_display_cutoff": literal_display_cutoff,
+            "author_timeout_rows_misclassified_as_completed": timeout_sentinel_band,
+            "control_changes_streed_endpoint_from_70_to_100_percent": (
+                streed["completion_rate_percent"] == 70.0
+                and literal_display_cutoff["streed"]["completion_rate_percent"] == 100.0
+            ),
+            "interpretation": (
+                "Using 600 directly misclassifies the release's capped 599.x-second "
+                "timeout rows as completed; this is why the author code uses 590."
+            ),
+        },
         "completion_advantage_percentage_points": (
             claritree["completion_rate_percent"] - streed["completion_rate_percent"]
         ),
@@ -204,14 +272,21 @@ def summarize() -> dict[str, object]:
             claritree["completion_rate_percent"] > streed["completion_rate_percent"]
         ),
         "paper_rounded_endpoint_percent": PAPER_ENDPOINT,
+        "paper_rounded_endpoint_exactly_reproduced": all(
+            independent[method]["completion_rate_percent"] == PAPER_ENDPOINT[method]
+            for method in METHODS
+        ),
         "locked_tolerance_percentage_points": TOLERANCE_PERCENTAGE_POINTS,
         "absolute_difference_percentage_points": absolute_differences,
         "within_locked_tolerance": within_tolerance,
         "numeric_claim_assessment": numeric_assessment,
         "interpretation": (
-            "The unchanged author plot and an independent implementation agree "
-            "on 100%/70%. The direction is supported, but STreeD is 10 points "
-            "from the paper's approximate 60%, outside the locked 5-point tolerance."
+            "The unchanged author plot and an independent implementation agree on "
+            "100%/70% under the release's explicit 590-second operational boundary, "
+            "which its plot labels as 600 seconds. The direction is supported, but "
+            "STreeD is 10 points from the paper's approximate 60%, outside the locked "
+            "5-point tolerance. A literal 600-second recount is retained only as a "
+            "negative control because it misclassifies 528 capped timeout rows."
         ),
     }
 
@@ -221,6 +296,7 @@ def main() -> None:
     if (
         not payload["source_backed_direction_verified"]
         or not payload["author_vs_independent_exact_crosscheck"]
+        or not payload["author_timeout_contract"]["contract_verified"]
         or payload["numeric_claim_assessment"] == "inconclusive"
     ):
         raise SystemExit(json.dumps(payload, indent=2))

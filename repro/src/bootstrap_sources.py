@@ -69,6 +69,7 @@ def main() -> None:
         raise RuntimeError(f"pybind11 CMake directory not found: {pybind11_cmake}")
 
     build_env = os.environ.copy()
+    build_env["PIP_USER"] = "0"
     build_env["CMAKE_ARGS"] = (
         f"-DCMAKE_PREFIX_PATH={EIGEN_INSTALL} "
         f"-Dpybind11_DIR={pybind11_cmake}"

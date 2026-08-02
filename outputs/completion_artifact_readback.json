@@ -8,7 +8,8 @@
     "outer": "mean",
     "depth": 4,
     "n_thresholds": 20,
-    "time_limit_s": 590.0
+    "author_operational_time_limit_s": 590.0,
+    "displayed_budget_s": 600.0
   },
   "claritree": {
     "records": 880,
@@ -24,9 +25,75 @@
     "minimum_train_time_s": 0.0023041725158691,
     "maximum_train_time_s": 599.8973509788514
   },
+  "author_script_execution": {
+    "command": [
+      "python",
+      "upstream/scripts/images/plot_completion_rate.py"
+    ],
+    "stdout": "Loading data...\nLoaded 4969 total records\n\n===== n_thresholds = 20 =====\nclaritree: 880 training time records\n  Min: 0.0001s, Max: 317.1642s, Mean: 37.8968s\nstreed: 1760 training time records\n  Min: 0.0023s, Max: 599.8974s, Mean: 210.3318s\n\nTime limit: 590s\nclaritree, n_thresholds=20: 880/880 completed (100.0%), 0 incomplete (> 590s)\nstreed, n_thresholds=20: 1232/1760 completed (70.0%), 528 incomplete (> 590s)\n\n[saved] Figure saved as: results/images/completion_rate_plot_full.pdf\n",
+    "counts": {
+      "claritree": {
+        "completed": 880,
+        "records": 880,
+        "completion_rate_percent_printed": 100.0
+      },
+      "streed": {
+        "completed": 1232,
+        "records": 1760,
+        "completion_rate_percent_printed": 70.0
+      }
+    },
+    "pdf_generated": true,
+    "pdf_bytes": 34,
+    "plotting_backend": "no-op headless matplotlib shim; numeric source unchanged"
+  },
+  "author_timeout_contract": {
+    "plot_source": "upstream/scripts/images/plot_completion_rate.py",
+    "plot_sha256": "b7eaf33fbb8a3bc799748541fcb6d95c28da43355d8222c138b5bbebd625e404",
+    "table_source": "upstream/scripts/tables/table_linear.py",
+    "table_sha256": "417c7c847cc3575b49e967349a20e11dd25f661d762b06c41c3b50d42d61134f",
+    "plot_matches": {
+      "operational_limit": true,
+      "displayed_limit": true,
+      "completion_rule": true,
+      "display_label": true
+    },
+    "table_matches": {
+      "operational_limit": true,
+      "timeout_rule": true,
+      "timeout_legend": true
+    },
+    "contract_verified": true,
+    "interpretation": "The release operationally marks times above 590 seconds as timeouts while labelling that boundary as the 600-second budget."
+  },
+  "author_vs_independent_exact_crosscheck": true,
+  "condition_relaxing_control": {
+    "rule": "naively count every recorded time <= the displayed 600-second label",
+    "literal_display_cutoff": {
+      "claritree": {
+        "records": 880,
+        "completed": 880,
+        "completion_rate_percent": 100.0,
+        "minimum_train_time_s": 0.000131607055664,
+        "maximum_train_time_s": 317.1642056465149
+      },
+      "streed": {
+        "records": 1760,
+        "completed": 1760,
+        "completion_rate_percent": 100.0,
+        "minimum_train_time_s": 0.0023041725158691,
+        "maximum_train_time_s": 599.8973509788514
+      }
+    },
+    "author_timeout_rows_misclassified_as_completed": {
+      "claritree": 0,
+      "streed": 528
+    },
+    "control_changes_streed_endpoint_from_70_to_100_percent": true,
+    "interpretation": "Using 600 directly misclassifies the release's capped 599.x-second timeout rows as completed; this is why the author code uses 590."
+  },
   "completion_advantage_percentage_points": 30.0,
   "source_backed_direction_verified": true,
-  "author_vs_independent_exact_crosscheck": true,
   "paper_rounded_endpoint_percent": {
     "claritree": 95.0,
     "streed": 60.0
@@ -42,5 +109,5 @@
     "streed": false
   },
   "numeric_claim_assessment": "falsified under released author artifacts",
-  "interpretation": "The exact numeric endpoint exceeds the locked tolerance for STreeD. The release separately supports the 30-point directional advantage."
+  "interpretation": "The unchanged author plot and an independent implementation agree on 100%/70% under the release's explicit 590-second operational boundary, which its plot labels as 600 seconds. The direction is supported, but STreeD is 10 points from the paper's approximate 60%, outside the locked 5-point tolerance. A literal 600-second recount is retained only as a negative control because it misclassifies 528 capped timeout rows."
 }

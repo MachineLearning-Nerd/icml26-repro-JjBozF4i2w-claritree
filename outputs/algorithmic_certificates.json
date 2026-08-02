@@ -1,0 +1,356 @@
+{
+  "protocol": "docs/CERTIFICATE_PROTOCOL.md",
+  "source": {
+    "author_source_sha256": "df81b36d7f932752ad55657cad7dd3faf066a93e79cb3b91167628fc3bca2821",
+    "eigen_llt_sha256": "362fe6b080c9b67d11106f821f926fa84ed24b2120fbdba2a09efb0869eef1ec",
+    "author_token_counts": {
+      "claritree_recursion": 1,
+      "left_update": 2,
+      "right_downdate": 2,
+      "greedy_completion_left": 4,
+      "greedy_completion_right": 4
+    },
+    "eigen_token_counts": {
+      "public_rank_update": 1,
+      "rank_update_dispatch": 1
+    },
+    "source_call_chain_verified": true
+  },
+  "c1_rank_update_work": {
+    "regression_dimension": "p = k + 1 (intercept included)",
+    "exact_recurrence_visits": "p*(p + 1)/2",
+    "identity_verified": true,
+    "polynomial_degree_in_p": 2,
+    "per_sample_order": "Theta(p^2) = Theta(k^2)",
+    "condition_relaxing_control": {
+      "replacement": "full Cholesky refactorization after every sample",
+      "exact_dense_work_proxy": "p*(2*p**2 + 3*p + 1)/6",
+      "polynomial_degree_in_p": 3,
+      "quadratic_property_lost": true
+    }
+  },
+  "c1_eigen_benchmark": {
+    "compile_command": [
+      "c++",
+      "-std=c++17",
+      "-O3",
+      "-Irepro/vendor/eigen",
+      "repro/cpp/benchmark_rank_update.cpp",
+      "-o",
+      "outputs/benchmark_rank_update"
+    ],
+    "measurements": [
+      {
+        "dimension": 4,
+        "calls_per_trial": 1500000,
+        "trials": 5,
+        "median_nanoseconds_per_call": 57.3508333333
+      },
+      {
+        "dimension": 8,
+        "calls_per_trial": 375000,
+        "trials": 5,
+        "median_nanoseconds_per_call": 109.506888
+      },
+      {
+        "dimension": 16,
+        "calls_per_trial": 93750,
+        "trials": 5,
+        "median_nanoseconds_per_call": 230.341333333
+      },
+      {
+        "dimension": 32,
+        "calls_per_trial": 23436,
+        "trials": 5,
+        "median_nanoseconds_per_call": 500.280935313
+      },
+      {
+        "dimension": 64,
+        "calls_per_trial": 5858,
+        "trials": 5,
+        "median_nanoseconds_per_call": 1213.62529874
+      },
+      {
+        "dimension": 96,
+        "calls_per_trial": 4000,
+        "trials": 5,
+        "median_nanoseconds_per_call": 2327.6875
+      },
+      {
+        "dimension": 128,
+        "calls_per_trial": 4000,
+        "trials": 5,
+        "median_nanoseconds_per_call": 3927.20825
+      }
+    ],
+    "fit_dimensions": [
+      16,
+      32,
+      64,
+      96,
+      128
+    ],
+    "log_log_slope": 1.3501665618868104,
+    "locked_acceptance_interval": [
+      1.1,
+      3.2
+    ],
+    "empirical_quadratic_scaling_consistent": true
+  },
+  "c2_runtime_space": {
+    "exact_level_sum": "d*k**3*n*(T*d*k - T*k + 4)/2",
+    "paper_decomposition": "T*d*k**4*n*(d - 1)/2 + 2*d*k**3*n",
+    "summation_identity_verified": true,
+    "upper_bound_difference_factored": "d*k**3*n*(5*T*d*k + T*k - 4)/2",
+    "upper_bound_nonnegative_reason": "3*d*k*T - 2 - (d-1)*k*T/2 >= 3*d - 2 - (d-1)/2 > 0 for positive integers d,k,T",
+    "sort_term": "k*n*log(n)",
+    "theorem_runtime": "O(k*n*log(n) + d^2*n*k^4*T)",
+    "exact_space_proxy": "2*n*k + n + d*k^2",
+    "space_regime": "n >= d*k, n,d,k positive integers",
+    "space_upper_bound": "4*n*k",
+    "space_counterexample_status": "unsat",
+    "space_bound_z3_verified": true,
+    "condition_relaxing_control": {
+      "removed_assumption": "n >= d*k",
+      "witness": {
+        "n": 1,
+        "d": 2,
+        "k": 2
+      },
+      "exact_space_proxy": 13,
+      "claimed_4nk_bound": 8,
+      "counterexample_status": "sat",
+      "bound_fails_outside_regime": true
+    }
+  },
+  "c3_dominance": {
+    "induction_hypothesis": [
+      "C_left <= G_selected_left",
+      "C_right <= G_selected_right"
+    ],
+    "candidate_inclusion_axiom": "the CLARITree minimum over Greedy-completed root candidates is no greater than the completion rooted at Greedy's own first split",
+    "negated_conclusion": "C_left + C_right > G_root_left + G_root_right",
+    "z3_counterexample_status": "unsat",
+    "dominance_induction_step_verified": true
+  },
+  "c3_arbitrary_gap": {
+    "paper_dgp": "Y=(1-B)ghz + B*m[J,1]*m[J,2], with independent Rademacher g,h,M; z~N(0,1), B~Bernoulli(epsilon), J~Uniform(1..U)",
+    "moment_certificate": {
+      "target_basis_cross_moments": {
+        "1": "0",
+        "g": "0",
+        "h": "0",
+        "z": "0",
+        "nuisance": "0"
+      },
+      "target_energy": "1",
+      "linear_leaf_residual_risk": "beta_0**2 + beta_g**2 + beta_h**2 + beta_m**2 + beta_z**2 + 1",
+      "linear_leaf_residual_identity_verified": true,
+      "g_h_child_cross_moments": {
+        "g": {
+          "-1": [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "1": [
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        "h": {
+          "-1": [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          "1": [
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        }
+      },
+      "z_child_symbolic_cross_moments": {
+        "1": "0",
+        "g": "0",
+        "h": "0",
+        "z": "0",
+        "nuisance": "0"
+      },
+      "z_split_energy_total_expectation_margin": "0",
+      "target_split_g_h_z_gain": "0 derived from exact cross moments and total expectation",
+      "matched_J_moment": "s",
+      "unmatched_J_moment": "0",
+      "uniform_J_moment": "s/U",
+      "child_cross_E_Y_mj2": "epsilon*s/U",
+      "loss_delta_in_child": "a**2 - 2*a*epsilon*s/U",
+      "optimal_child_coefficient": "epsilon*s/U",
+      "gain_before_using_s_squared_equals_one": "epsilon**2*s**2/U**2",
+      "new_nuisance_pair_split_gain": "epsilon**2/U**2",
+      "greedy_path": "strictly positive nuisance gain beats zero target gain for every depth while U>d",
+      "unresolved_pair_counterexample_status": "unsat",
+      "greedy_mse_lower_bound": "1 - epsilon",
+      "claritree_candidate": "split g, then h; predict g*h*z in each leaf",
+      "claritree_candidate_mse": "2*epsilon"
+    },
+    "ratio_margin_over_1/(4*epsilon)": "-(2*epsilon - 1)/(4*epsilon)",
+    "universal_sign_reason": "(1-2*epsilon)/(4*epsilon) > 0 exactly when 0 < epsilon < 1/2",
+    "exact_rational_witnesses": [
+      {
+        "depth": 2,
+        "U": 3,
+        "epsilon": "1/4",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/144",
+        "greedy_mse_lower_bound": "3/4",
+        "claritree_mse_upper_bound": "1/2",
+        "ratio_lower_bound": "3/2"
+      },
+      {
+        "depth": 2,
+        "U": 3,
+        "epsilon": "1/10",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/900",
+        "greedy_mse_lower_bound": "9/10",
+        "claritree_mse_upper_bound": "1/5",
+        "ratio_lower_bound": "9/2"
+      },
+      {
+        "depth": 2,
+        "U": 3,
+        "epsilon": "1/100",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/90000",
+        "greedy_mse_lower_bound": "99/100",
+        "claritree_mse_upper_bound": "1/50",
+        "ratio_lower_bound": "99/2"
+      },
+      {
+        "depth": 3,
+        "U": 4,
+        "epsilon": "1/4",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/256",
+        "greedy_mse_lower_bound": "3/4",
+        "claritree_mse_upper_bound": "1/2",
+        "ratio_lower_bound": "3/2"
+      },
+      {
+        "depth": 3,
+        "U": 4,
+        "epsilon": "1/10",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/1600",
+        "greedy_mse_lower_bound": "9/10",
+        "claritree_mse_upper_bound": "1/5",
+        "ratio_lower_bound": "9/2"
+      },
+      {
+        "depth": 3,
+        "U": 4,
+        "epsilon": "1/100",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/160000",
+        "greedy_mse_lower_bound": "99/100",
+        "claritree_mse_upper_bound": "1/50",
+        "ratio_lower_bound": "99/2"
+      },
+      {
+        "depth": 4,
+        "U": 5,
+        "epsilon": "1/4",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/400",
+        "greedy_mse_lower_bound": "3/4",
+        "claritree_mse_upper_bound": "1/2",
+        "ratio_lower_bound": "3/2"
+      },
+      {
+        "depth": 4,
+        "U": 5,
+        "epsilon": "1/10",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/2500",
+        "greedy_mse_lower_bound": "9/10",
+        "claritree_mse_upper_bound": "1/5",
+        "ratio_lower_bound": "9/2"
+      },
+      {
+        "depth": 4,
+        "U": 5,
+        "epsilon": "1/100",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/250000",
+        "greedy_mse_lower_bound": "99/100",
+        "claritree_mse_upper_bound": "1/50",
+        "ratio_lower_bound": "99/2"
+      },
+      {
+        "depth": 8,
+        "U": 9,
+        "epsilon": "1/4",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/1296",
+        "greedy_mse_lower_bound": "3/4",
+        "claritree_mse_upper_bound": "1/2",
+        "ratio_lower_bound": "3/2"
+      },
+      {
+        "depth": 8,
+        "U": 9,
+        "epsilon": "1/10",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/8100",
+        "greedy_mse_lower_bound": "9/10",
+        "claritree_mse_upper_bound": "1/5",
+        "ratio_lower_bound": "9/2"
+      },
+      {
+        "depth": 8,
+        "U": 9,
+        "epsilon": "1/100",
+        "target_split_gain": "0",
+        "nuisance_split_gain": "1/810000",
+        "greedy_mse_lower_bound": "99/100",
+        "claritree_mse_upper_bound": "1/50",
+        "ratio_lower_bound": "99/2"
+      }
+    ],
+    "condition_relaxing_controls": {
+      "epsilon": {
+        "value": "3/4",
+        "violated_assumption": "epsilon < 1/2",
+        "ratio_margin_over_1/(4*epsilon)": "-1/6",
+        "strict_ratio_bound_fails": true
+      },
+      "nuisance_pairs": {
+        "depth": 4,
+        "U": 4,
+        "violated_assumption": "U > d",
+        "unresolved_pairs_after_d_splits": 0,
+        "greedy_path_guarantee_lost": true
+      }
+    },
+    "construction_certificate_verified": true
+  },
+  "checks": {
+    "source_call_chain": true,
+    "rank_update_degree_two": true,
+    "rank_update_control_degree_three": true,
+    "rank_update_benchmark": true,
+    "runtime_sum": true,
+    "space_z3": true,
+    "space_relaxed_control": true,
+    "dominance_z3": true,
+    "gap_construction": true,
+    "gap_relaxed_controls": true
+  },
+  "all_certificates_verified": true
+}

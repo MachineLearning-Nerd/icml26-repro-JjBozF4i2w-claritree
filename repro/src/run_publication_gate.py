@@ -93,6 +93,7 @@ def main() -> None:
         "source_structure_c1": "repro/src/verify_source_structure.py",
         "core_claims_c1_c3": "repro/src/verify_core_claims.py",
         "theorem_consequences_c2_c3": "repro/src/verify_theorem_consequences.py",
+        "exact_certificates_c1_c3": "repro/src/verify_algorithmic_certificates.py",
         "california_c4": "repro/src/verify_california_artifacts.py",
         "completion_c6": "repro/src/verify_completion_artifacts.py",
     }.items():
@@ -115,6 +116,22 @@ def main() -> None:
     checks["cpu_fixed_split_c4_calibration"] = {"passed": fixed_ok, "detail": fixed_detail}
 
     c6 = read_json(OUTPUTS / "completion_artifact_readback.json")
+    c6_control_ok = (
+        c6["author_timeout_contract"]["contract_verified"]
+        and c6["author_vs_independent_exact_crosscheck"]
+        and c6["condition_relaxing_control"][
+            "control_changes_streed_endpoint_from_70_to_100_percent"
+        ]
+        and c6["numeric_claim_assessment"]
+        == "falsified under released author artifacts"
+    )
+    checks["c6_timeout_and_falsification_contract"] = {
+        "passed": c6_control_ok,
+        "detail": (
+            "author 590-second timeout / 600-second display contract, exact "
+            "cross-check, literal-600 control, and locked falsification agree"
+        ),
+    }
     c5_scope = ROOT / "docs/C5_SCOPE_EXCLUSION.md"
     scope_ok = c5_scope.is_file() and "must never be presented" in c5_scope.read_text(encoding="utf-8")
     checks["c5_scope_exclusion"] = {"passed": scope_ok, "detail": str(c5_scope.relative_to(ROOT))}

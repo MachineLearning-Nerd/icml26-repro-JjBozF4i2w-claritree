@@ -23,11 +23,11 @@ The earlier C5 reconstruction substituted `n=1000`, an 80/20 split, `k=G=4`,
 `rho=.5`, `sigma=2`, seeds 0–4, depth 2, 20 thresholds, and fixed penalties;
 it is now explicitly excluded from formal C5 evidence.
 
-The final successful suite used 2m50s wall time including a clean environment
-and C++ builds (94.736 s reported scientific checks). The official public judge
-record is still **4/12**
-at judged Space SHA `e6300f190cfe8da733d5dbec071b75a665d1670b` until a rejudge
-consumes the updated publication.
+The final successful suite used 60.25s wall time including the fresh California
+fit and all exact certificates. The official public judge record remains
+**4/12** at judged Space SHA
+`34a4aa65b3930afa8f82009a442a5bcadd9937af`. The strengthened candidate is
+published at `a45ab5063011ae58c97d78c3f6e3bc348b98d262` and is awaiting judge.
 
 - [Illustrated technical report](reports/claritree-6-claim-reproduction/report.md)
 - [Self-contained tutorial notebook](notebooks/claritree_reproduction.py)

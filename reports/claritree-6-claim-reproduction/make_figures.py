@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 
+ROOT = Path(__file__).resolve().parents[2]
 OUT = Path(__file__).parent / "images"
 OUT.mkdir(parents=True, exist_ok=True)
 INK = "#17213b"
@@ -17,6 +19,10 @@ GREEN = "#2a9d68"
 RED = "#c84a52"
 GRAY = "#7b8498"
 GRID = "#d9deea"
+
+
+def read_output(name: str) -> dict[str, object]:
+    return json.loads((ROOT / "outputs" / name).read_text(encoding="utf-8"))
 
 
 def finish(fig: plt.Figure, name: str) -> None:
@@ -59,9 +65,13 @@ def headline() -> None:
 
 
 def rank_update() -> None:
-    dimensions = np.array([4, 8, 16, 32, 64, 96, 128])
-    nanoseconds = np.array([59.1379, 110.6189, 232.4884, 516.8313, 1275.3073, 2322.8335, 3882.5938])
-    fit = dimensions >= 16
+    rows = read_output("algorithmic_certificates.json")["c1_eigen_benchmark"]["measurements"]
+    dimensions = np.array([row["dimension"] for row in rows])
+    nanoseconds = np.array([row["median_nanoseconds_per_call"] for row in rows])
+    fit_dimensions = set(
+        read_output("algorithmic_certificates.json")["c1_eigen_benchmark"]["fit_dimensions"]
+    )
+    fit = np.array([dimension in fit_dimensions for dimension in dimensions])
     slope, intercept = np.polyfit(np.log(dimensions[fit]), np.log(nanoseconds[fit]), 1)
     curve = np.exp(intercept) * dimensions**slope
     fig, ax = plt.subplots(figsize=(8, 4.8))
@@ -79,9 +89,17 @@ def rank_update() -> None:
 
 
 def california() -> None:
+    artifact = read_output("california_artifact_readback.json")
+    fresh = read_output("judge_ready_summary.json")["claims"]["C4"]["observed_result"][
+        "fresh_local_outer4"
+    ]
     fig, ax = plt.subplots(figsize=(8, 4.8))
     labels = ["CLARITree\nrelease (5-fold)", "CLARITree\nfresh outer-4", "STreeD\nrelease (5-fold)"]
-    values = [0.7499375138, 0.7431327225, 0.7048454540]
+    values = [
+        artifact["claritree"]["mean_test_r2"],
+        fresh["metrics"]["test_r2"],
+        artifact["streed"]["mean_test_r2"],
+    ]
     bars = ax.bar(labels, values, color=[BLUE, GREEN, ORANGE], width=0.62)
     ax.set_ylim(0.67, 0.77)
     ax.set_ylabel("Test $R^2$")
@@ -116,11 +134,18 @@ def gap_certificate() -> None:
 
 
 def completion() -> None:
+    evidence = read_output("completion_artifact_readback.json")
     fig, ax = plt.subplots(figsize=(8, 4.8))
     x = np.arange(2)
     width = 0.34
-    paper = [95, 60]
-    release = [100, 70]
+    paper = [
+        evidence["paper_rounded_endpoint_percent"]["claritree"],
+        evidence["paper_rounded_endpoint_percent"]["streed"],
+    ]
+    release = [
+        evidence["claritree"]["completion_rate_percent"],
+        evidence["streed"]["completion_rate_percent"],
+    ]
     b1 = ax.bar(x - width / 2, paper, width, label="Paper approximate endpoint", color="#9aa6bd")
     b2 = ax.bar(x + width / 2, release, width, label="Exact author artifact", color=[BLUE, ORANGE])
     ax.set_xticks(x, ["CLARITree", "STreeD"])

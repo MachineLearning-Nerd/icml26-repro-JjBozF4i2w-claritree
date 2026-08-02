@@ -167,7 +167,12 @@ def assessment_payload(calibration: dict[str, object], c5: dict[str, object] | N
         "C6": {
             "paper_result": "roughly 95% versus 60% completion at the 600-second budget",
             "observed_result": {
-                "cutoff_seconds": completion["selection"]["time_limit_s"],
+                "author_operational_cutoff_seconds": completion["selection"][
+                    "author_operational_time_limit_s"
+                ],
+                "displayed_budget_seconds": completion["selection"][
+                    "displayed_budget_s"
+                ],
                 "claritree_percent": completion["claritree"]["completion_rate_percent"],
                 "streed_percent": completion["streed"]["completion_rate_percent"],
                 "advantage_points": completion["completion_advantage_percentage_points"],
@@ -227,6 +232,9 @@ def main() -> None:
 
     result = assessment_payload(calibration, c5)
     result["total_elapsed_seconds"] = time.perf_counter() - suite_started
+    (OUTPUTS / "judge_ready_summary.json").write_text(
+        json.dumps(result, indent=2) + "\n", encoding="utf-8"
+    )
     print("\n=== CLAIM ASSESSMENTS ===")
     for claim_id, claim in result["claims"].items():
         print(f"{claim_id}: {claim['assessment']}")

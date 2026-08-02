@@ -49,3 +49,16 @@ quadratic and derive the `g`-then-`h` leaf risk from the mixture response.
 Any failed assertion makes the run fail closed. Empirical timings are evidence
 about the pinned implementation on this machine; the symbolic certificates are
 the evidence for the universal statements.
+
+## Post-judgment repair controls
+
+These controls were added after the 2026-07-24 judge feedback and are not part
+of the earlier protocol lock. They test that each certificate can fail when a
+claim condition or mechanism is removed:
+
+- replacing C1's rank update with a full Cholesky refactorization changes the
+  exact work proxy from degree two to degree three;
+- removing C2's `n >= d*k` space regime admits the explicit counterexample
+  `n=1, d=2, k=2`, where the proxy is 13 but `4*n*k` is 8;
+- setting C3's `epsilon=3/4` makes the claimed strict ratio margin negative,
+  and setting `U=d=4` removes the guaranteed unresolved nuisance pair.
