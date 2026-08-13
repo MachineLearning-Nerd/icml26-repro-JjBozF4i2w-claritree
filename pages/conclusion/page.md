@@ -6,7 +6,7 @@
 -->
 Claims 1–3 are verified by source-tied exact certificates with controls that break outside the relevant assumptions. Claim 4 remains verified by all five released folds and a fresh author-entrypoint outer-fold fit. Claim 6 is fully resolved by falsification: released author artifacts consistently yield 100%/70%, not approximately 95%/60% under the locked ±5-point rule. Claim 5 remains honestly inconclusive because its Figure 1 protocol and data are absent; the reproducible ceiling is therefore five resolved claims, not a claim of perfect coverage.
 
-All formal work used local CPU, fixed source SHAs, deterministic regenerators, and no GPU. The exact command is `bash repro/run_local_claim_suite.sh`; cheap claim tests are `python -m pytest -q repro/tests`. [Paper](https://ar5iv.labs.arxiv.org/html/2606.12840) · [author source pin](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd) · [reproduction repository](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree) · [Hugging Face Space](https://huggingface.co/spaces/DineshAI/JjBozF4i2w).
+All formal work used local CPU, fixed source SHAs, deterministic regenerators, and no GPU. The exact command is `bash repro/run_local_claim_suite.sh`; cheap claim tests are `python -m pytest -q repro/tests`. [Paper](https://ar5iv.labs.arxiv.org/html/2606.12840) · [author source pin](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd) · [reproduction repository](https://github.com/MachineLearning-Nerd/icml26-claritree) · [Hugging Face Space](https://huggingface.co/spaces/DineshAI/JjBozF4i2w).
 
 ---
 <!-- trackio-cell

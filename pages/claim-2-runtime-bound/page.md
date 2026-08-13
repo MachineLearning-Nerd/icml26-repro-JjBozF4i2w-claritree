@@ -35,7 +35,7 @@ space counterexample query: unsat — PASS
 condition-relaxing control: n=1,d=2,k=2 gives 13 > 8, query sat — PASS
 ````
 
-The exact code and raw JSON are in [`verify_algorithmic_certificates.py`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/repro/src/verify_algorithmic_certificates.py) and [`outputs/algorithmic_certificates.json`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/outputs/algorithmic_certificates.json). This is a machine-checked audit of the theorem's derivation, not a replacement for the paper's proof.
+The exact code and raw JSON are in [`verify_algorithmic_certificates.py`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/repro/src/verify_algorithmic_certificates.py) and [`outputs/algorithmic_certificates.json`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/outputs/algorithmic_certificates.json). This is a machine-checked audit of the theorem's derivation, not a replacement for the paper's proof.
 
 ---
 <!-- trackio-cell

@@ -33,7 +33,7 @@ assessment: FALSIFIED under released author artifacts
 directional completion advantage: 30 points
 ````
 
-The complete verifier is [`verify_completion_artifacts.py`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/repro/src/verify_completion_artifacts.py), with raw output in [`completion_artifact_readback.json`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/outputs/completion_artifact_readback.json). It executes the numeric author script unchanged using a no-op headless plot shim, then independently recomputes every count.
+The complete verifier is [`verify_completion_artifacts.py`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/repro/src/verify_completion_artifacts.py), with raw output in [`completion_artifact_readback.json`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/outputs/completion_artifact_readback.json). It executes the numeric author script unchanged using a no-op headless plot shim, then independently recomputes every count.
 
 ---
 <!-- trackio-cell

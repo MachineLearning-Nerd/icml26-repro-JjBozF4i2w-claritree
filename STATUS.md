@@ -1,105 +1,49 @@
-# Current status
+# Reproduction status
 
-## Current step
+## Paper
 
-`published:awaiting_judge`
+- **Title:** CLARITree: Cholesky and Lookahead Accelerations for Regression with Interpretable Piecewise Linear Trees
+- **Authors:** Yixiao Wang, Hayden McTavish, Varun Babbar, Margo Seltzer, and Cynthia Rudin
+- **arXiv:** [2606.12840](https://arxiv.org/abs/2606.12840)
+- **OpenReview:** [JjBozF4i2w](https://openreview.net/forum?id=JjBozF4i2w)
 
-## Completed
+## Decision
 
-- Claimed OpenReview `JjBozF4i2w` in the shared coordination registry.
-- Pinned the author release at
-  `Yixiao-Wang-Stats/CLARITree@4397f8dbc8b63751777e7918b89972e793796dfd`.
-- Pinned Eigen `3.4.0@3147391d946bb4b6c68edd901f2add6ac1f31f8c` as the
-  documented C++ header dependency without altering `upstream/`.
-- Built and ran the unmodified C++ source on released Auction outer-0 data.
-  CLARITree test R² was `0.937706`; Greedy was `0.919556`.
-- Built the released Python extension in the project-local Python 3.12
-  environment. The source tree remains clean.
-- Independently re-aggregated the released California Housing raw folds for
-  C4: CLARITree `0.74994 +/- 0.01006` test R2 versus STreeD
-  `0.70485 +/- 0.00803`, after validation-only hyperparameter selection.
-- Reproduced the C6 plot-input selection from the released `results/final.csv`.
-  Its exact 590-second endpoint is CLARITree `100.0%` (880/880 records) versus
-  STreeD `70.0%` (1232/1760). This supports the completion advantage but does
-  not exactly reproduce the paper's rounded `95%`/`60%` wording; both values
-  are retained transparently.
-- Added fail-closed source-structure and theorem-consequence verifiers for the
-  C1--C3 audit: source recursion/lookahead/rank-one-update tokens are present,
-  the released quantile pool matches independent NumPy, ten deterministic
-  C++-extension comparisons never make CLARITree worse than Greedy, and the
-  displayed C3 final inequality is checked over 200 epsilon values.
-- Ran exact source C++ California outer-4 calibration on the authorized
-  CPU-only HF `cpu-upgrade` flavor: job `6a609a58d09dc1f57c6c1d62`. The source
-  calculation completed in `76.21s` at `463,796 KB` peak RSS; its authenticated
-  job-log payload is retained in `outputs/california_outer4_cpp.json`. The job
-  subsequently returned ERROR only because the supplied token lacked permission
-  to create the private artifact dataset; no computation result was lost.
-- Ran the matching fixed-split author-driver calibration on CPU-upgrade job
-  `6a609dfd13e6ef894d54b655`: the selected outer-4 configuration exactly
-  reproduced committed test R2 `0.7431327225376596`.
-- Created and pinned the Trackio logbook with pages for every anchored claim,
-  controls, methods, and conclusion.
-- Created and pushed the public GitHub handoff:
-  `MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree@7b261a2`.
-- Added protocol-locked, machine-checkable C1--C3 certificates. The pinned
-  source call chain and exact rank-update recurrence verify C1; SymPy and Z3
-  verify the C2 level sum and space implication; Z3 plus exact Appendix B.2
-  moments and rational witnesses verify C3.
-- Executed the exact C6 author plot path under a locked tolerance. The
-  unchanged author code and independent recount agree on CLARITree `100%`
-  (880/880) and STreeD `70%` (1232/1760). The 10-point STreeD discrepancy
-  exceeds the locked +/-5-point tolerance, so C6 is falsified under the
-  released author artifacts while its directional advantage is supported.
-- Exhaustively audited the public C5 release surface. The exact Figure 1
-  protocol remains unavailable, so the supplementary reconstruction is
-  excluded under the require-author-protocol rule.
-- Passed the exact current challenge validator and an outcome-blind clean-packet
-  review at 10/12: C1--C4 verified, C6 falsified at full released scope, and C5
-  blocked by absent essential author material.
-- Published the additive text-only Hugging Face candidate at
-  `a45ab5063011ae58c97d78c3f6e3bc348b98d262`. All 12 changed paths were
-  byte-verified from that exact revision; all 19 baseline paths remain present,
-  and every untouched baseline path remains byte-identical.
+- **Overall paper-level status:** `INCONCLUSIVE`
+- **Scoped local evidence gate:** `PASS`
+- **C1–C3:** source-tied conditional certificates pass
+- **C4:** scoped California Housing reproduction passes
+- **C5:** `INCONCLUSIVE_SOURCE_MISSING`
+- **C6:** `FALSIFIED_AS_RELEASED`
+- **Judge projection:** 10/12 under the documented rubric; not a guaranteed score
 
-## Next actions
+The unresolved C5 protocol is the main blocker. The C6 result is a faithful audit of the released author artifacts, not a claim that the authors’ intended un-released experiment has been disproved.
 
-1. Mirror the exact published text paths and strengthened reproduction files to
-   GitHub, then reconcile the live judge result.
-2. Obtain the exact Figure 1 protocol from the authors. This is the only known
-   path from the honest 10/12 projection to defensible 12/12 evidence.
+## Evidence
 
-## Gate state
+- Generated scoped gate: [`outputs/publication_gate.json`](outputs/publication_gate.json)
+- Conservative interpretation: [`publication_gate.json`](publication_gate.json)
+- Full claim report: [`reports/claritree-6-claim-reproduction/report.md`](reports/claritree-6-claim-reproduction/report.md)
+- Source pins: [`docs/SOURCE_MANIFEST.md`](docs/SOURCE_MANIFEST.md)
+- C5 boundary: [`docs/C5_SCOPE_EXCLUSION.md`](docs/C5_SCOPE_EXCLUSION.md)
+- C6 protocol: [`docs/C6_EXACT_RECONSTRUCTION_PROTOCOL.md`](docs/C6_EXACT_RECONSTRUCTION_PROTOCOL.md)
 
-`repro/src/run_publication_gate.py` now writes a fail-closed gate proof. The
-retained CLI run is a memory/CPU feasibility calibration only: its `main.cpp`
-entrypoint randomly re-splits input, so it is not comparable to the fixed
-outer-fold table. The gate separately requires a retained fixed-split run
-through `scripts.run_ours_outer.fit_eval` whose outer-4 `test_r2` matches the
-committed table.
+## Source and compute
 
-That fixed-split run is complete: CPU job `6a609dfd13e6ef894d54b655` used the
-pinned driver entrypoint and exactly reproduced outer-4 `test_r2`
-`0.7431327225376596` in `62.04s` fit / `88.53s` elapsed. The setup-only retry
-`6a609d9713e6ef894d54b64f` failed before fitting because it invoked absent
-`pip` rather than UV's installer; it is not evidence.
+- Author source: `Yixiao-Wang-Stats/CLARITree@4397f8dbc8b63751777e7918b89972e793796dfd`
+- Eigen: `3.4.0@3147391d946bb4b6c68edd901f2add6ac1f31f8c`
+- Formal environment: Python 3.12.11 on Apple arm64, 8 logical CPUs, no GPU
+- Full suite: `bash repro/run_local_claim_suite.sh`
+- Bounded tests: `python -m pytest -q repro/tests`
 
-The current evidence resolves C1--C4 as verified and C6 as falsified under the
-released author artifacts. C5 remains inconclusive because it is not a
-runnable author protocol. This projects to 10/12 under the judge rubric; it is
-not a guaranteed score until a new judge record is issued.
+## Repository policy
 
-FULL_GATE_READY: JjBozF4i2w
+- **Maintainer identity:** MachineLearning-Nerd
+- **Canonical branch:** `main`
+- **Historical branch roles:** [`BRANCH_AUDIT.md`](BRANCH_AUDIT.md)
+- **Official implementation:** [Yixiao-Wang-Stats/CLARITree](https://github.com/Yixiao-Wang-Stats/CLARITree)
+- **This repository:** independent reproduction and audit, not an official author release
 
-The official live judged baseline remains 4/12 at
-`34a4aa65b3930afa8f82009a442a5bcadd9937af`. The verified candidate at
-`a45ab5063011ae58c97d78c3f6e3bc348b98d262` is awaiting judge; its projected
-10/12 is not banked leaderboard credit.
+## Required next evidence
 
-## Scope guard
-
-The paper specifies a *family* for C5's synthetic DGP, but the pinned author
-release contains no generator, configuration, seed, raw synthetic artifact, or
-enough headline parameters to recreate the reported MSEs. The full
-under-specification audit is in `docs/C5_SCOPE_EXCLUSION.md`. Treat any
-reconstruction as an independent supplementary check only, not source rerun
-evidence. No Hugging Face GPU is authorized or used.
+To resolve C5, the authors would need to release the Figure 1 generator or generated data, sample size, feature/group counts, correlation and noise parameters, train/test split, seeds, model hyperparameters, and evaluation path—or an equivalent machine-checkable artifact containing those values.

@@ -1,0 +1,60 @@
+{
+  "schema_version": 2,
+  "paper": {
+    "openreview": "JjBozF4i2w",
+    "arxiv": "2606.12840",
+    "title": "CLARITree: Cholesky and Lookahead Accelerations for Regression with Interpretable Piecewise Linear Trees",
+    "authors": ["Yixiao Wang", "Hayden McTavish", "Varun Babbar", "Margo Seltzer", "Cynthia Rudin"]
+  },
+  "overall_status": "INCONCLUSIVE",
+  "publication_gate_passed": false,
+  "scoped_reproduction_gate_passed": true,
+  "paper_claims_verified": 0,
+  "claims_total": 6,
+  "claim_statuses": {
+    "c1_rank_one_cholesky_updates": "VERIFIED_CONDITIONAL",
+    "c2_runtime_bound": "VERIFIED_CONDITIONAL",
+    "c3_dominance_and_gap": "VERIFIED_CONDITIONAL",
+    "c4_california_housing": "REPRODUCED_SCOPED",
+    "c5_synthetic_result": "INCONCLUSIVE_SOURCE_MISSING",
+    "c6_completion_budget": "FALSIFIED_AS_RELEASED"
+  },
+  "raw_scoped_gate": {
+    "path": "outputs/publication_gate.json",
+    "local_checks_passed": true,
+    "tests_passed": true,
+    "selected_claims": ["C1", "C2", "C3", "C4", "C6"],
+    "excluded_claims": {"C5": "source protocol missing; see docs/C5_SCOPE_EXCLUSION.md"}
+  },
+  "source_pins": {
+    "author": "Yixiao-Wang-Stats/CLARITree@4397f8dbc8b63751777e7918b89972e793796dfd",
+    "eigen": "3147391d946bb4b6c68edd901f2add6ac1f31f8c"
+  },
+  "c4": {
+    "claritree_mean_test_r2": 0.7499375138107127,
+    "streed_mean_test_r2": 0.7048454539571957,
+    "fresh_outer4_test_r2": 0.7431327225376608,
+    "released_outer4_test_r2": 0.7431327225376596,
+    "absolute_difference": 1.2212453270876722e-15
+  },
+  "c5": {
+    "status": "INCONCLUSIVE_SOURCE_MISSING",
+    "missing": ["generator", "synthetic data", "sample size", "feature/group counts", "correlation", "noise", "split", "seeds", "model hyperparameters"]
+  },
+  "c6": {
+    "author_operational_cutoff_seconds": 590.0,
+    "displayed_budget_seconds": 600.0,
+    "claritree_completion_percent": 100.0,
+    "streed_completion_percent": 70.0,
+    "paper_rounded_endpoints_percent": {"claritree": 95.0, "streed": 60.0},
+    "direction_verified": true,
+    "numeric_claim_status": "FALSIFIED_AS_RELEASED"
+  },
+  "interpretation": [
+    "The generated outputs/publication_gate.json remains the raw scoped run record.",
+    "C1-C3 are conditional certificate audits; C4 is a scoped artifact/source execution; C5 is blocked by missing author material.",
+    "C6 is falsified under the released author artifacts and fixed tolerance, while the directional advantage remains supported.",
+    "No paper-level publication claim is made while C5 remains unresolved."
+  ],
+  "maintainer": "MachineLearning-Nerd"
+}

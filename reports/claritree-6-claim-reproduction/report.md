@@ -139,9 +139,8 @@ identifiability problem. The honest ceiling is therefore **10/12 pending a
 rejudge**. The current official judge record remains 4/12 on the older Space
 SHA until a new judgment is issued.
 
-Important lineage: [C1–C3 certificate branch](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/machine-checkable-c1-c3-certificates),
-[exact C6 branch](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/protocol-locked-exact-c6-reconstruction), and
-[executable exact-moment C3 branch](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/executable-exact-moment-c3-certificate), plus the
-[excluded independent C5 reconstruction](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/tree/orx/independent-figure-1-reconstruction).
-The [public logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w) is the
-judge-facing publication surface.
+Important lineage and the role of every historical experiment ref are recorded
+in [`BRANCH_AUDIT.md`](../../BRANCH_AUDIT.md). The old `orx/*` refs are
+intentionally removed from the final remote after their contributions and
+limitations are documented; the [public logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w)
+remains the judge-facing publication surface.

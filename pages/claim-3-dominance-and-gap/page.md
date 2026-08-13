@@ -46,7 +46,7 @@ CONTROL epsilon=3/4: ratio margin = -1/6; strict bound fails — PASS
 CONTROL depth=4,U=4: no unresolved nuisance pair remains; greedy-path guarantee lost — PASS
 ````
 
-The executable evaluator is [`verify_algorithmic_certificates.py`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/repro/src/verify_algorithmic_certificates.py), with its full 12 exact-rational witnesses in [`algorithmic_certificates.json`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/outputs/algorithmic_certificates.json). It uses symbolic marginal moments rather than inserting expected labels.
+The executable evaluator is [`verify_algorithmic_certificates.py`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/repro/src/verify_algorithmic_certificates.py), with its full 12 exact-rational witnesses in [`algorithmic_certificates.json`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/outputs/algorithmic_certificates.json). It uses symbolic marginal moments rather than inserting expected labels.
 
 ---
 <!-- trackio-cell

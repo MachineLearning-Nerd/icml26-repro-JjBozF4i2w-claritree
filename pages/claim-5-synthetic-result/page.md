@@ -30,7 +30,7 @@ Official source HEAD and pinned audit SHA are both:
 4397f8dbc8b63751777e7918b89972e793796dfd
 ````
 
-The official repository audited is [Yixiao-Wang-Stats/CLARITree](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd). The exclusion policy is documented in [`docs/C5_SCOPE_EXCLUSION.md`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/docs/C5_SCOPE_EXCLUSION.md).
+The official repository audited is [Yixiao-Wang-Stats/CLARITree](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd). The exclusion policy is documented in [`docs/C5_SCOPE_EXCLUSION.md`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/docs/C5_SCOPE_EXCLUSION.md).
 
 ---
 <!-- trackio-cell

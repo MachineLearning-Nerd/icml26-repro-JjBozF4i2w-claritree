@@ -16,7 +16,7 @@
 $ python repro/src/verify_algorithmic_certificates.py
 ````
 
-The complete deterministic verifier is [`repro/src/verify_algorithmic_certificates.py`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/repro/src/verify_algorithmic_certificates.py); the compiled source is [`benchmark_rank_update.cpp`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/repro/cpp/benchmark_rank_update.cpp).
+The complete deterministic verifier is [`repro/src/verify_algorithmic_certificates.py`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/repro/src/verify_algorithmic_certificates.py); the compiled source is [`benchmark_rank_update.cpp`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/repro/cpp/benchmark_rank_update.cpp).
 
 ````python title=c1_certificate_core.py
 # Exact independent recurrence used by the verifier.
@@ -56,4 +56,4 @@ The earlier candidate's source-structure evidence remains true: the pinned imple
 <!-- trackio-cell
 {"type": "markdown", "id": "cell_clari_c1_reproduce", "created_at": "2026-08-02T10:52:18+00:00", "title": "Reproduce and provenance"}
 -->
-Run `bash repro/run_local_claim_suite.sh` from the [public reproduction repository](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree). The bootstrap pins [CLARITree `4397f8d`](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd) and [Eigen `3147391`](https://gitlab.com/libeigen/eigen/-/tree/3147391d946bb4b6c68edd901f2add6ac1f31f8c). No GPU or remote job is used.
+Run `bash repro/run_local_claim_suite.sh` from the [public reproduction repository](https://github.com/MachineLearning-Nerd/icml26-claritree). The bootstrap pins [CLARITree `4397f8d`](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd) and [Eigen `3147391`](https://gitlab.com/libeigen/eigen/-/tree/3147391d946bb4b6c68edd901f2add6ac1f31f8c). No GPU or remote job is used.

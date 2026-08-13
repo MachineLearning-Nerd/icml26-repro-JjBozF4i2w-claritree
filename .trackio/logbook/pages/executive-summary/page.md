@@ -14,7 +14,7 @@ This CPU-only audit resolves five of six official claims against the paper and a
 | Cost | Local CPU, $0 incremental cloud cost | Not estimated from the released materials |
 | Outcome | C1–C4 verified; C6 falsified; C5 inconclusive | Not claimed |
 
-Provenance: [paper](https://ar5iv.labs.arxiv.org/html/2606.12840), [public reproduction repository](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree), [existing Hugging Face Space](https://huggingface.co/spaces/DineshAI/JjBozF4i2w). The protocol used local CPU only; no Hugging Face Job, Bucket, model, or dataset repository was created.
+Provenance: [paper](https://ar5iv.labs.arxiv.org/html/2606.12840), [public reproduction repository](https://github.com/MachineLearning-Nerd/icml26-claritree), [existing Hugging Face Space](https://huggingface.co/spaces/DineshAI/JjBozF4i2w). The protocol used local CPU only; no Hugging Face Job, Bucket, model, or dataset repository was created.
 
 ---
 <!-- trackio-cell

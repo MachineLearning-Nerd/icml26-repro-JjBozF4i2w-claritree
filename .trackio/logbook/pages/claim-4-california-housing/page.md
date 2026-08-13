@@ -32,7 +32,7 @@ R² advantage: 0.04509205985351705
 source claim verified: true
 ````
 
-The full fail-closed readback is [`verify_california_artifacts.py`](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/repro/src/verify_california_artifacts.py), and the released author source/data are pinned at [`4397f8d`](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd).
+The full fail-closed readback is [`verify_california_artifacts.py`](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/repro/src/verify_california_artifacts.py), and the released author source/data are pinned at [`4397f8d`](https://github.com/Yixiao-Wang-Stats/CLARITree/tree/4397f8dbc8b63751777e7918b89972e793796dfd).
 
 ---
 <!-- trackio-cell

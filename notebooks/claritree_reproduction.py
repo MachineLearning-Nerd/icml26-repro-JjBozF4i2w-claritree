@@ -165,7 +165,7 @@ def _(mo):
 
     The command creates a clean pip environment, checks out pinned author and
     Eigen commits, builds the extension, and prints structured C1–C6 evidence.
-    See the [illustrated report](https://github.com/MachineLearning-Nerd/icml26-repro-JjBozF4i2w-claritree/blob/main/reports/claritree-6-claim-reproduction/report.md)
+    See the [illustrated report](https://github.com/MachineLearning-Nerd/icml26-claritree/blob/main/reports/claritree-6-claim-reproduction/report.md)
     and [public logbook](https://huggingface.co/spaces/DineshAI/JjBozF4i2w).
     """)
     return
